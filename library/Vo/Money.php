@@ -105,17 +105,19 @@ final class Money
     /**
      * Get the default formatter
      *
-     * This will create an 'en-US' formatter if one is not set prior to this
-     * method being called.
+     * This will create a formatter based on the Locale default if one is not
+     * set prior to this method being called.
      *
      * @return \NumberFormatter
      */
     public static function getDefaultFormatter()
     {
         if (null === self::$defaultFormatter) {
-            self::$defaultFormatter = new \NumberFormatter(
-                'en-US',
-                \NumberFormatter::CURRENCY
+            self::setDefaultFormatter(
+                new \NumberFormatter(
+                    \Locale::getDefault(),
+                    \NumberFormatter::CURRENCY
+                )
             );
         }
 

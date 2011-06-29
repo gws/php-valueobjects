@@ -1,26 +1,38 @@
 <?php
 
-error_reporting( E_ALL | E_STRICT );
+// Set appropriate error reporting
+error_reporting(E_ALL | E_STRICT);
 
-$root = realpath(dirname(__DIR__));
-$library = $root . DIRECTORY_SEPARATOR . '/library';
-$tests = $root . DIRECTORY_SEPARATOR . '/tests';
+// Find the root
+define('TESTS_VO_ROOT', realpath(__DIR__));
 
-$path = array(
-    $library,
-    $tests,
-    get_include_path(),
+// Override our include path
+set_include_path(
+    implode(
+        PATH_SEPARATOR,
+        array(
+            TESTS_VO_ROOT,
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'library',
+            get_include_path()
+        )
+    )
 );
-set_include_path(implode(PATH_SEPARATOR, $path));
 
 spl_autoload_register(function($class) {
-    $file = str_replace(array('\\', '_'), DIRECTORY_SEPARATOR, $class) . '.php';
-
-    if (false !== ($file = stream_resolve_include_path($file))) {
-        return include_once($file);
+    if (class_exists($class, false) || interface_exists($class, false)) {
+        return;
     }
 
-    return false;
-});
+    $className = ltrim($class, '\\');
+    $file = '';
+    $namespace = '';
+    if ($lastNsPos = strripos($className, '\\')) {
+        $namespace = substr($className, 0, $lastNsPos);
+        $className = substr($className, $lastNsPos + 1);
+        $file      = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+    }
 
-unset($root, $library, $tests, $path);
+    $file .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+
+    include $file;
+});

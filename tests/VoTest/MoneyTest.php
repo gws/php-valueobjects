@@ -1,6 +1,6 @@
 <?php
 
-namespace Vo;
+namespace VoTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 

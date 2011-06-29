@@ -1,6 +1,6 @@
 <phpunit bootstrap="./Bootstrap.php" colors="true">
     <testsuite name="Value object test suite">
-        <directory>.</directory>
+        <directory>./VoTest</directory>
     </testsuite>
     
     <groups>
@@ -8,10 +8,4 @@
             <group>disable</group>
         </exclude>
     </groups>
-
-    <filter>
-        <whitelist>
-            <directory suffix=".php">../library/</directory>
-        </whitelist>
-    </filter>
 </phpunit>

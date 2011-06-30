@@ -1,0 +1,222 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">Mac.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>category</dt>
+<dd>Vo</dd>
+<dt>package</dt>
+<dd>Vo</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CVo%5CMac">Mac</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">PHP Value Objects</p>
+<div class="long-description">
+</div>
+<a name="classes"></a><a id="\Vo\Mac"></a><h2 class="class">\Vo\Mac<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>category</dt>
+<dd>Vo</dd>
+<dt>package</dt>
+<dd>Vo</dd>
+<dt>Properties</dt>
+<dd><a class="property protected" href="#%5CVo%5CMac::%24mac">$mac</a></dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CVo%5CMac::__construct()">__construct</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMac::format()">format</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMac::__toString()">__toString</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Encapsulate a MAC address</p>
+<div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\Vo\Mac::$mac"></a><h4 class="property protected">$mac<div class="to-top"><a href="#%5CVo%5CMac">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\string <span class="highlight">$mac</span> = ''</code><p class="short-description">Normalized MAC address (internal format)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Vo\Mac::__construct()"></a><h4 class="method public">__construct<div class="to-top"><a href="#Mac">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+          \string $raw
+          )
+        </span>
+        :
+        </code><p class="short-description">Constructor</p>
+<div class="long-description"><p>Accepts an EUI-48 (MAC) address in any valid format.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$raw</dt>
+<dd>\string<br><em>Raw MAC address</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Mac::__toString()"></a><h4 class="method public">__toString<div class="to-top"><a href="#Mac">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__toString</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \string</code><p class="short-description">Displays this MAC address</p>
+<div class="long-description"><p>The MAC address is displayed in a lowercased, non-delimited format.</p>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Mac::format()"></a><h4 class="method public">format<div class="to-top"><a href="#Mac">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">format</span><span class="nb-faded-text">(
+          \string $upper
+              =
+              false, \string $delimiter
+              =
+              :, \string $groupLength
+              =
+              2
+          )
+        </span>
+        :
+        \string</code><p class="short-description">Formats the MAC address in a configurable way</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$upper</dt>
+<dd>\string<br><em>Whether or not to uppercase the formatted address</em>
+</dd>
+<dt>$delimiter</dt>
+<dd>\string<br><em>The delimiter to use between groups</em>
+</dd>
+<dt>$groupLength</dt>
+<dd>\string<br><em>The length of delimited hex digit groups (0 for none)</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.0</a>.
+    </small></body></html>

@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * PHP Value Objects
+ *
+ * @category Vo
+ * @package Vo
+ */
+
+/**
  * Copyright 2011 Gordon Stratton. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -34,8 +41,11 @@ namespace Vo;
  * Money value object
  *
  * @see http://martinfowler.com/eaaCatalog/money.html
+ *
+ * @category Vo
+ * @package Vo
  */
-final class Money
+class Money
 {
     /**
      * Internal amount
@@ -84,6 +94,7 @@ final class Money
     /**
      * Set the default formatter
      *
+     * @param $formatter
      * @return void
      */
     public static function setDefaultFormatter(\NumberFormatter $formatter)
@@ -191,6 +202,7 @@ final class Money
     /**
      * Set the internal number formatter
      *
+     * @param $formatter
      * @return Money
      */
     public function setFormatter(\NumberFormatter $formatter)
@@ -203,6 +215,7 @@ final class Money
     /**
      * Set the scale used in calculations for this object
      *
+     * @param int $value
      * @return Money
      */
     public function setScale($value)

@@ -57,13 +57,6 @@ class Ip
     protected $ip;
 
     /**
-     * Length of the packed in_addr IP address, in bytes
-     *
-     * @var int
-     */
-    protected $numBytes;
-
-    /**
      * Version of the IP address
      *
      * @var int
@@ -88,15 +81,16 @@ class Ip
         }
 
         $this->ip = $packed;
-        $this->numBytes = mb_strlen($packed, '8bit');
 
-        if ($this->numBytes !== 4 && $this->numBytes !== 16) {
+        $byteCount = mb_strlen($packed, '8bit');
+
+        if ($byteCount !== 4 && $byteCount !== 16) {
             throw new InvalidArgumentException(
                 'Invalid IP address: length in bytes must be 4 or 16.'
             );
         }
 
-        $this->version = $this->numBytes === 4 ? 4 : 6;
+        $this->version = $byteCount === 4 ? 4 : 6;
     }
 
     /**
@@ -153,10 +147,10 @@ class Ip
     {
         $i4 = $i3 = $i2 = $i1 = 0;
 
-        if ($this->numBytes === 4) {
+        if ($this->getVersion() === 4) {
             $i2 = 0x0000ffff;
             list(, $i1) = unpack('N1', $this->ip);
-        } elseif ($this->numBytes === 16) {
+        } else {
             list(, $i4, $i3, $i2, $i1) = unpack('N4', $this->ip);
         }
 

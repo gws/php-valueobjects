@@ -998,7 +998,7 @@ to, or greater than the tested date range.&lt;/p&gt;
       </method>
     </class>
   </file>
-  <file path="Ip.php" hash="2c40a9a30bb617c65300390cab87e21a">
+  <file path="Ip.php" hash="28e546bd50c6a04341dfc10923c349d6">
     <docblock>
       <description>PHP Value Objects</description>
       <long-description>
@@ -1031,10 +1031,10 @@ to, or greater than the tested date range.&lt;/p&gt;
         </docblock>
       </property>
       <property final="false" static="false" visibility="protected" line="64">
-        <name>$numBytes</name>
+        <name>$version</name>
         <default/>
         <docblock>
-          <description>Length of the packed in_addr IP address, in bytes</description>
+          <description>Version of the IP address</description>
           <long-description>
 </long-description>
           <tag name="var" description="" type="\int" line="59">
@@ -1042,35 +1042,23 @@ to, or greater than the tested date range.&lt;/p&gt;
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="71">
-        <name>$version</name>
-        <default/>
-        <docblock>
-          <description>Version of the IP address</description>
-          <long-description>
-</long-description>
-          <tag name="var" description="" type="\int" line="66">
-            <type by_reference="false">\int</type>
-          </tag>
-        </docblock>
-      </property>
-      <method final="false" abstract="false" static="false" visibility="public" line="80">
+      <method final="false" abstract="false" static="false" visibility="public" line="73">
         <name>__construct</name>
         <docblock>
           <description>Constructor</description>
           <long-description>&lt;p&gt;Accepts an IPv4 or an IPv6 address in any valid format.&lt;/p&gt;
 </long-description>
-          <tag name="param" description="Raw IP address" type="\string" variable="$raw" line="73">
+          <tag name="param" description="Raw IP address" type="\string" variable="$raw" line="66">
             <type by_reference="false">\string</type>
           </tag>
         </docblock>
-        <argument line="80">
+        <argument line="73">
           <name>$raw</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="113">
+      <method final="false" abstract="false" static="true" visibility="public" line="107">
         <name>fromIntegerArray</name>
         <docblock>
           <description>Constructs an Ip object from an array of integers</description>
@@ -1079,31 +1067,31 @@ address-agnostic fashion.&lt;/p&gt;
 
 &lt;p&gt;Note: The array of integers must be most-significant-integer first&lt;/p&gt;
 </long-description>
-          <tag name="param" description="Integer array, most-significant first" type="\Vo\$integers" variable="$integers" line="102">
+          <tag name="param" description="Integer array, most-significant first" type="\Vo\$integers" variable="$integers" line="96">
             <type by_reference="false">\Vo\$integers</type>
           </tag>
-          <tag name="return" description="" type="\Vo\Ip" line="102">
+          <tag name="return" description="" type="\Vo\Ip" line="96">
             <type by_reference="false">\Vo\Ip</type>
           </tag>
         </docblock>
-        <argument line="113">
+        <argument line="107">
           <name>$integers</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="137">
+      <method final="false" abstract="false" static="false" visibility="public" line="131">
         <name>format</name>
         <docblock>
           <description>Formats the IP address using inet_ntop</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="\string" line="132">
+          <tag name="return" description="" type="\string" line="126">
             <type by_reference="false">\string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="152">
+      <method final="false" abstract="false" static="false" visibility="public" line="146">
         <name>toIntegerArray</name>
         <docblock>
           <description>Marshals an Ip object to an array of integers</description>
@@ -1112,57 +1100,57 @@ address-agnostic fashion.&lt;/p&gt;
 
 &lt;p&gt;Note: The array of integers will be most-significant-integer first&lt;/p&gt;
 </long-description>
-          <tag name="return" description="" type="\array" line="142">
+          <tag name="return" description="" type="\array" line="136">
             <type by_reference="false">\array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="184">
+      <method final="false" abstract="false" static="false" visibility="public" line="178">
         <name>isInNetwork</name>
         <docblock>
           <description>Tests if an IP address belongs to a specific network</description>
           <long-description>&lt;p&gt;Accepts a network base address and a prefix length.&lt;/p&gt;
 </long-description>
-          <tag name="param" description="Base address for the network to test" type="\Vo\$base" variable="$base" line="175">
+          <tag name="param" description="Base address for the network to test" type="\Vo\$base" variable="$base" line="169">
             <type by_reference="false">\Vo\$base</type>
           </tag>
-          <tag name="param" description="Prefix length to test" type="\int" variable="$prefixlen" line="175">
+          <tag name="param" description="Prefix length to test" type="\int" variable="$prefixlen" line="169">
             <type by_reference="false">\int</type>
           </tag>
-          <tag name="return" description="" type="\bool" line="175">
+          <tag name="return" description="" type="\bool" line="169">
             <type by_reference="false">\bool</type>
           </tag>
         </docblock>
-        <argument line="184">
+        <argument line="178">
           <name>$base</name>
           <default/>
           <type>Ip</type>
         </argument>
-        <argument line="184">
+        <argument line="178">
           <name>$prefixlen</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="263">
+      <method final="false" abstract="false" static="false" visibility="public" line="257">
         <name>getVersion</name>
         <docblock>
           <description>Returns the IP version of this object</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="\int" line="258">
+          <tag name="return" description="" type="\int" line="252">
             <type by_reference="false">\int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="272">
+      <method final="false" abstract="false" static="false" visibility="public" line="266">
         <name>__toString</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag name="see" description="format()" line="268"/>
-          <tag name="return" description="" type="\string" line="268">
+          <tag name="see" description="format()" line="262"/>
+          <tag name="return" description="" type="\string" line="262">
             <type by_reference="false">\string</type>
           </tag>
         </docblock>

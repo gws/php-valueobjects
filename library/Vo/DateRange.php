@@ -68,8 +68,8 @@ class DateRange
      *
      * @var DateTime
      */
-
     protected $start;
+
     /**
      * Internal 'end' DateTime
      *

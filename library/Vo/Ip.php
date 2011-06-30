@@ -120,7 +120,7 @@ class Ip
             $packed = pack('N4', $i4, $i3, $i2, $i1);
         }
 
-        return new self(inet_ntop($packed));
+        return new static(inet_ntop($packed));
     }
 
     /**

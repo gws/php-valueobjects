@@ -1,0 +1,1032 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">DateRange.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>category</dt>
+<dd>Vo</dd>
+<dt>package</dt>
+<dd>Vo</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CVo%5CDateRange">DateRange</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">PHP Value Objects</p>
+<div class="long-description">
+</div>
+<a name="classes"></a><a id="\Vo\DateRange"></a><h2 class="class">\Vo\DateRange<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>category</dt>
+<dd>Vo</dd>
+<dt>package</dt>
+<dd>Vo</dd>
+<dt>see</dt>
+<dd>http://www.martinfowler.com/ap2/range.html</dd>
+<dt>Constants</dt>
+<dd><a class="constant" href="#%5CVo%5CDateRange::FUTURE">FUTURE</a></dd>
+<dd><a class="constant" href="#%5CVo%5CDateRange::PAST">PAST</a></dd>
+<dt>Properties</dt>
+<dd><a class="property protected" href="#%5CVo%5CDateRange::%24start">$start</a></dd>
+<dd><a class="property protected" href="#%5CVo%5CDateRange::%24end">$end</a></dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CVo%5CDateRange::__construct()">__construct</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::fromIso8601()">fromIso8601</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::fromData()">fromData</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::infinite()">infinite</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::upTo()">upTo</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::startingOn()">startingOn</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::getStart()">getStart</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::getEnd()">getEnd</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::isEmpty()">isEmpty</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::equals()">equals</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::includes()">includes</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::overlaps()">overlaps</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::gap()">gap</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::abuts()">abuts</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::diff()">diff</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::isContiguous()">isContiguous</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::getSeriesStart()">getSeriesStart</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::getSeriesEnd()">getSeriesEnd</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::compareTo()">compareTo</a></dd>
+<dd><a class="method public" href="#%5CVo%5CDateRange::__toString()">__toString</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Class to deal with and perform operations on ranges of dates.</p>
+<div class="long-description">
+</div>
+<h3>Constants</h3>
+<div>
+<a id="\Vo\DateRange::FUTURE"></a><h4 class="constant">FUTURE<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="constant">
+<code>\string <span class="highlight">FUTURE</span> = '9999-01-01'
+      </code><p class="short-description">Far-future ISO-8601 date</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="constant-info">
+<dt>value</dt>
+<dd>9999-01-01</dd>
+<dt></dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::PAST"></a><h4 class="constant">PAST<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="constant">
+<code>\string <span class="highlight">PAST</span> = '1000-01-01'
+      </code><p class="short-description">Far-past ISO-8601 date</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="constant-info">
+<dt>value</dt>
+<dd>1000-01-01</dd>
+<dt></dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\Vo\DateRange::$end"></a><h4 class="property protected">$end<div class="to-top"><a href="#%5CVo%5CDateRange">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\DateTime <span class="highlight">$end</span> = ''</code><p class="short-description">Internal 'end' DateTime</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\DateTime<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::$start"></a><h4 class="property protected">$start<div class="to-top"><a href="#%5CVo%5CDateRange">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\DateTime <span class="highlight">$start</span> = ''</code><p class="short-description">Internal 'start' DateTime</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\DateTime<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Vo\DateRange::__construct()"></a><h4 class="method public">__construct<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+          \Vo\$start $start, \Vo\$end $end
+          )
+        </span>
+        :
+        \null</code><p class="short-description">Constructor</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$start</dt>
+<dd>\Vo\$start<br><em>Start date</em>
+</dd>
+<dt>$end</dt>
+<dd>\Vo\$end<br><em>End date</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\null</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::__toString()"></a><h4 class="method public">__toString<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__toString</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \string</code><p class="short-description">Convert the DateRange to an ISO-8601 interval string</p>
+<div class="long-description"><p>http://en.wikipedia.org/wiki/ISO_8601#Time_intervals</p>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::abuts()"></a><h4 class="method public">abuts<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">abuts</span><span class="nb-faded-text">(
+          \Vo\$arg $arg
+          )
+        </span>
+        :
+        \bool</code><p class="short-description">Test if the date ranges are next to each other and non-overlapping</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$arg</dt>
+<dd>\Vo\$arg<br><em>Other DateRange to test</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::compareTo()"></a><h4 class="method public">compareTo<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">compareTo</span><span class="nb-faded-text">(
+          \Vo\$arg $arg
+          )
+        </span>
+        :
+        \int</code><p class="short-description">A comparison function for two DateRanges</p>
+<div class="long-description"><p>Returns either -1, 0, or 1 if the current date range is less than, equal
+to, or greater than the tested date range.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$arg</dt>
+<dd>\Vo\$arg<br><em>Other DateRange to test</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\int</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::diff()"></a><h4 class="method public">diff<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">diff</span><span class="nb-faded-text">(
+          \Vo\$arg $arg
+          )
+        </span>
+        :
+        \Vo\self</code><p class="short-description">Take the difference of two date ranges</p>
+<div class="long-description"><p>The difference of two date ranges in this case means that the overlap of
+the two ranges will be removed from the first range, and the result will
+be returned.</p>
+
+<p>This method will refuse to bisect the current date range (thus,
+confusingly, creating two date ranges), so the argument date range must
+begin prior to and end during the current date range, or begin during and
+end after the current date range.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$arg</dt>
+<dd>\Vo\$arg<br><em>Other DateRange to test</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\Vo\self</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>throws</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::equals()"></a><h4 class="method public">equals<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">equals</span><span class="nb-faded-text">(
+          \Vo\$arg $arg
+          )
+        </span>
+        :
+        \bool</code><p class="short-description">Test a DateRange for equality with the current DateRange</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$arg</dt>
+<dd>\Vo\$arg<br><em>Other DateRange to test</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::fromData()"></a><h4 class="method public">fromData<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">fromData</span><span class="nb-faded-text">(
+          \array|\Vo\stdClass $object, \string $start
+              =
+              start, \string $end
+              =
+              end
+          )
+        </span>
+        :
+        \Vo\self</code><p class="short-description">Build a DateRange object from existing data</p>
+<div class="long-description"><p>This accepts an array or object and assumes members 'start' and 'end'
+somewhere in the array or object. You can override these values with
+whatever you like.</p>
+
+<pre>
+// Example usage
+$array = array('start' => '2009-05-06', 'end' => new DateTime('2009-06-07'));
+
+$object = new stdClass();
+$object->start = '2009-05-06';
+$object->end = new DateTime('2009-06-07');
+
+$range1 = self::fromData($array);
+$range2 = self::fromData($object);
+</pre>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$object</dt>
+<dd>\array\Vo\stdClass<br><em></em>
+</dd>
+<dt>$start</dt>
+<dd>\string<br><em>&amp;#039;Start&amp;#039; member or index name</em>
+</dd>
+<dt>$end</dt>
+<dd>\string<br><em>&amp;#039;End&amp;#039; member or index name</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\Vo\self</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::fromIso8601()"></a><h4 class="method public">fromIso8601<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">fromIso8601</span><span class="nb-faded-text">(
+          \string $string
+          )
+        </span>
+        :
+        \Vo\self</code><p class="short-description">Build a DateRange object from an ISO-8601 interval string</p>
+<div class="long-description"><p>Currently, this only accepts dates of the form Y-m-d/Y-m-d.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$string</dt>
+<dd>\string<br><em>ISO-8601 interval string</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\Vo\self</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::gap()"></a><h4 class="method public">gap<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">gap</span><span class="nb-faded-text">(
+          \Vo\$arg $arg
+          )
+        </span>
+        :
+        \bool|\int</code><p class="short-description">Test whether this date range has a gap and if so, of how many days</p>
+<div class="long-description"><p>This function will return false if the date ranges overlap.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$arg</dt>
+<dd>\Vo\$arg<br><em>Other DateRange to test</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\bool|\int</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::getEnd()"></a><h4 class="method public">getEnd<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getEnd</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \DateTime</code><p class="short-description">Accessor that returns the end date of this range</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\DateTime</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::getSeriesEnd()"></a><h4 class="method public">getSeriesEnd<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getSeriesEnd</span><span class="nb-faded-text">(
+          \Vo\$args $args
+          )
+        </span>
+        :
+        \DateTime</code><p class="short-description">Return the end of a series of DateRanges</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$args</dt>
+<dd>\Vo\$args<br><em>Other DateRanges to test</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\DateTime</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::getSeriesStart()"></a><h4 class="method public">getSeriesStart<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getSeriesStart</span><span class="nb-faded-text">(
+          \Vo\$args $args
+          )
+        </span>
+        :
+        \DateTime</code><p class="short-description">Return the start of a series of DateRanges</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$args</dt>
+<dd>\Vo\$args<br><em>Other DateRanges to test</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\DateTime</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::getStart()"></a><h4 class="method public">getStart<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getStart</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \DateTime</code><p class="short-description">Accessor that returns the start date of this range</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\DateTime</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::includes()"></a><h4 class="method public">includes<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">includes</span><span class="nb-faded-text">(
+          \DateTime|\Vo\self $arg
+          )
+        </span>
+        :
+        \bool</code><p class="short-description">Test whether this DateRange includes a DateTime or a DateRange</p>
+<div class="long-description"><p>If a DateTime is greater than or equal to the start of AND less than
+or equal to the end of this DateRange, it is considered included.</p>
+
+<p>If a DateRange is fully enclosed inside this DateRange, it is
+considered included. The test is essentially the same as for the
+DateTime except it is performed on both the start and end dates of the
+DateRange.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$arg</dt>
+<dd>\DateTime\Vo\self<br><em>Other object to test</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::infinite()"></a><h4 class="method public">infinite<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">infinite</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \Vo\self</code><p class="short-description">Create the infinite date range</p>
+<div class="long-description"><p>Note: internally, a finite but unusual boundary is used.</p>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\Vo\self</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::isContiguous()"></a><h4 class="method public">isContiguous<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">isContiguous</span><span class="nb-faded-text">(
+          \Vo\$args $args
+          )
+        </span>
+        :
+        \bool</code><p class="short-description">Test if a series of DateRanges are contiguous</p>
+<div class="long-description"><p>In other words, test that each of the date ranges 'abut' one another.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$args</dt>
+<dd>\Vo\$args<br><em>Other DateRanges to test</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::isEmpty()"></a><h4 class="method public">isEmpty<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">isEmpty</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \bool</code><p class="short-description">Test whether this range represents an empty range</p>
+<div class="long-description"><p>This is primarily used internally, but other methods may set the range
+to empty. This usually signals some kind of error where the return value
+is expected to be a DateRange and can be tested for emptiness.</p>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::overlaps()"></a><h4 class="method public">overlaps<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">overlaps</span><span class="nb-faded-text">(
+          \Vo\$arg $arg
+          )
+        </span>
+        :
+        \bool</code><p class="short-description">Test whether this DateRange overlaps the current DateRange</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$arg</dt>
+<dd>\Vo\$arg<br><em>Other DateRange to test</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::startingOn()"></a><h4 class="method public">startingOn<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">startingOn</span><span class="nb-faded-text">(
+          \Vo\$start $start
+          )
+        </span>
+        :
+        \Vo\self</code><p class="short-description">Create a date range with an bounded past, but an unbounded future</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$start</dt>
+<dd>\Vo\$start<br><em>Lower bound</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\Vo\self</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\DateRange::upTo()"></a><h4 class="method public">upTo<div class="to-top"><a href="#DateRange">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">upTo</span><span class="nb-faded-text">(
+          \Vo\$end $end
+          )
+        </span>
+        :
+        \Vo\self</code><p class="short-description">Create a date range with an unbounded past, but a bounded future</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$end</dt>
+<dd>\Vo\$end<br><em>Upper bound</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\Vo\self</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.0</a>.
+    </small></body></html>

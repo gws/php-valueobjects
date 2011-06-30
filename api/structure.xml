@@ -1,0 +1,910 @@
+<?xml version="1.0"?>
+<project version="0.11.0" title="">
+  <file path="Money.php" hash="d701e4eb5b1b89d95723b1eff21d87b2">
+    <docblock>
+      <description>PHP Value Objects</description>
+      <long-description>
+</long-description>
+      <tag name="category" description="Vo"/>
+      <tag name="package" description="Vo"/>
+    </docblock>
+    <class final="false" abstract="false" line="48" namespace="Vo">
+      <name>Money</name>
+      <extends/>
+      <full_name>\Vo\Money</full_name>
+      <docblock>
+        <description>Money value object</description>
+        <long-description>
+</long-description>
+        <tag name="see" description="http://martinfowler.com/eaaCatalog/money.html" line="40"/>
+        <tag name="category" description="Vo" line="40"/>
+        <tag name="package" description="Vo" line="40"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="55">
+        <name>$amount</name>
+        <default/>
+        <docblock>
+          <description>Internal amount</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\string" line="50">
+            <type by_reference="false">\string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="62">
+        <name>$currency</name>
+        <default/>
+        <docblock>
+          <description>Internal currency as a 3-digit ISO 4217 code</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\string" line="57">
+            <type by_reference="false">\string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="69">
+        <name>$formatter</name>
+        <default/>
+        <docblock>
+          <description>Currency formatter (requires the intl extension)</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\NumberFormatter" line="64">
+            <type by_reference="false">\NumberFormatter</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="77">
+        <name>$scale</name>
+        <default/>
+        <docblock>
+          <description>Scale to use for calculations</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\int" line="71">
+            <type by_reference="false">\int</type>
+          </tag>
+          <tag name="see" description="http://www.php.net/manual/en/function.bcscale.php" line="71"/>
+        </docblock>
+      </property>
+      <property final="false" static="true" visibility="protected" line="84">
+        <name>$defaultFormatter</name>
+        <default>null</default>
+        <docblock>
+          <description>Default currency formatter (requires the intl extension)</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\NumberFormatter" line="79">
+            <type by_reference="false">\NumberFormatter</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="true" visibility="protected" line="92">
+        <name>$defaultScale</name>
+        <default>20</default>
+        <docblock>
+          <description>Default scale to use for calculations</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\int" line="86">
+            <type by_reference="false">\int</type>
+          </tag>
+          <tag name="see" description="http://www.php.net/manual/en/function.bcscale.php" line="86"/>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" line="100">
+        <name>setDefaultFormatter</name>
+        <docblock>
+          <description>Set the default formatter</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="" variable="$formatter" line="94"/>
+          <tag name="return" description="" type="\void" line="94">
+            <type by_reference="false">\void</type>
+          </tag>
+        </docblock>
+        <argument line="100">
+          <name>$formatter</name>
+          <default/>
+          <type>NumberFormatter</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="111">
+        <name>setDefaultScale</name>
+        <docblock>
+          <description>Set the default scale to use for calculations</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\int" variable="$scale" line="105">
+            <type by_reference="false">\int</type>
+          </tag>
+          <tag name="return" description="" type="\void" line="105">
+            <type by_reference="false">\void</type>
+          </tag>
+        </docblock>
+        <argument line="111">
+          <name>$scale</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="124">
+        <name>getDefaultFormatter</name>
+        <docblock>
+          <description>Get the default formatter</description>
+          <long-description>&lt;p&gt;This will create a formatter based on the Locale default if one is not
+set prior to this method being called.&lt;/p&gt;
+</long-description>
+          <tag name="return" description="" type="\NumberFormatter" line="116">
+            <type by_reference="false">\NumberFormatter</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="143">
+        <name>getDefaultScale</name>
+        <docblock>
+          <description>Get the default scale to use for calculations</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="\int" line="138">
+            <type by_reference="false">\int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="154">
+        <name>__construct</name>
+        <docblock>
+          <description>Constructor</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\string" variable="$amount" line="148">
+            <type by_reference="false">\string</type>
+          </tag>
+          <tag name="param" description="ISO-4217 code" type="\string" variable="$currency" line="148">
+            <type by_reference="false">\string</type>
+          </tag>
+        </docblock>
+        <argument line="154">
+          <name>$amount</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="154">
+          <name>$currency</name>
+          <default>USD</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="167">
+        <name>getAmount</name>
+        <docblock>
+          <description>Get the internal amount</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="\string" line="162">
+            <type by_reference="false">\string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="177">
+        <name>getCurrency</name>
+        <docblock>
+          <description>Get the internal currency as an ISO-4217 code</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="\string" line="172">
+            <type by_reference="false">\string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="187">
+        <name>getFormatter</name>
+        <docblock>
+          <description>Get the internal number formatter</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="\NumberFormatter" line="182">
+            <type by_reference="false">\NumberFormatter</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="197">
+        <name>getScale</name>
+        <docblock>
+          <description>Get the scale used in calculations for this object</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="\int" line="192">
+            <type by_reference="false">\int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="208">
+        <name>setFormatter</name>
+        <docblock>
+          <description>Set the internal number formatter</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="" variable="$formatter" line="202"/>
+          <tag name="return" description="" type="\Vo\Money" line="202">
+            <type by_reference="false">\Vo\Money</type>
+          </tag>
+        </docblock>
+        <argument line="208">
+          <name>$formatter</name>
+          <default/>
+          <type>NumberFormatter</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="221">
+        <name>setScale</name>
+        <docblock>
+          <description>Set the scale used in calculations for this object</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\int" variable="$value" line="215">
+            <type by_reference="false">\int</type>
+          </tag>
+          <tag name="return" description="" type="\Vo\Money" line="215">
+            <type by_reference="false">\Vo\Money</type>
+          </tag>
+        </docblock>
+        <argument line="221">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="237">
+        <name>add</name>
+        <docblock>
+          <description>Add a number or Money to this object and return a new Money result</description>
+          <long-description>&lt;p&gt;If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="" type="\mixed" variable="$other" line="228">
+            <type by_reference="false">\mixed</type>
+          </tag>
+          <tag name="throws" description="if an invalid value is supplied" type="\InvalidArgumentException" line="228">
+            <type by_reference="false">\InvalidArgumentException</type>
+          </tag>
+        </docblock>
+        <argument line="237">
+          <name>$other</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="251">
+        <name>div</name>
+        <docblock>
+          <description>Divide a number or Money into this object and return a new Money result</description>
+          <long-description>&lt;p&gt;If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="" type="\mixed" variable="$other" line="242">
+            <type by_reference="false">\mixed</type>
+          </tag>
+          <tag name="throws" description="if an invalid value is supplied" type="\InvalidArgumentException" line="242">
+            <type by_reference="false">\InvalidArgumentException</type>
+          </tag>
+        </docblock>
+        <argument line="251">
+          <name>$other</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="265">
+        <name>mul</name>
+        <docblock>
+          <description>Multiply a number or Money by this object and return a new Money result</description>
+          <long-description>&lt;p&gt;If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="" type="\mixed" variable="$other" line="256">
+            <type by_reference="false">\mixed</type>
+          </tag>
+          <tag name="throws" description="if an invalid value is supplied" type="\InvalidArgumentException" line="256">
+            <type by_reference="false">\InvalidArgumentException</type>
+          </tag>
+        </docblock>
+        <argument line="265">
+          <name>$other</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="279">
+        <name>sub</name>
+        <docblock>
+          <description>Subtract a number or Money from this object and return a new Money result</description>
+          <long-description>&lt;p&gt;If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="" type="\mixed" variable="$other" line="270">
+            <type by_reference="false">\mixed</type>
+          </tag>
+          <tag name="throws" description="if an invalid value is supplied" type="\InvalidArgumentException" line="270">
+            <type by_reference="false">\InvalidArgumentException</type>
+          </tag>
+        </docblock>
+        <argument line="279">
+          <name>$other</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="293">
+        <name>round</name>
+        <docblock>
+          <description>Round the internal amount at the specified precision</description>
+          <long-description>&lt;p&gt;Note that the value returned is a string. This is a function of the BC
+library and allows large numbers to be represented.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="" type="\int" variable="$precision" line="284">
+            <type by_reference="false">\int</type>
+          </tag>
+          <tag name="return" description="" type="\string" line="284">
+            <type by_reference="false">\string</type>
+          </tag>
+        </docblock>
+        <argument line="293">
+          <name>$precision</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="325">
+        <name>format</name>
+        <docblock>
+          <description>Format the number and currency according to the current formatter</description>
+          <long-description>&lt;p&gt;For example, if the currency is USD and the value is 42.123, this will
+output "$42.12".&lt;/p&gt;
+</long-description>
+          <tag name="return" description="" type="\string" line="317">
+            <type by_reference="false">\string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="336">
+        <name>__toString</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="see" description="{format()}" line="333"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" line="348">
+        <name>assertAndConvertValidMoney</name>
+        <docblock>
+          <description>Asserts the validity of a given value and converts it to a Money object</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\mixed" variable="$money" line="341">
+            <type by_reference="false">\mixed</type>
+          </tag>
+          <tag name="return" description="" type="\Vo\Money" line="341">
+            <type by_reference="false">\Vo\Money</type>
+          </tag>
+          <tag name="throws" description="if a value is not valid money" type="\InvalidArgumentException" line="341">
+            <type by_reference="false">\InvalidArgumentException</type>
+          </tag>
+        </docblock>
+        <argument line="348">
+          <name>$money</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" line="380">
+        <name>operation</name>
+        <docblock>
+          <description>Generic function to perform a BC math operation</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="a valid BC math function" type="\string" variable="$func" line="373">
+            <type by_reference="false">\string</type>
+          </tag>
+          <tag name="param" description="second value to use in the operation" type="\Vo\$other" variable="$other" line="373">
+            <type by_reference="false">\Vo\$other</type>
+          </tag>
+          <tag name="return" description="" type="\Vo\Money" line="373">
+            <type by_reference="false">\Vo\Money</type>
+          </tag>
+        </docblock>
+        <argument line="380">
+          <name>$func</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="380">
+          <name>$other</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="DateRange.php" hash="2dd50a894d348ce70f6847e6ae08177c">
+    <docblock>
+      <description>PHP Value Objects</description>
+      <long-description>
+</long-description>
+      <tag name="category" description="Vo"/>
+      <tag name="package" description="Vo"/>
+    </docblock>
+    <namespace-alias name="DateTime">DateTime</namespace-alias>
+    <namespace-alias name="InvalidArgumentException">InvalidArgumentException</namespace-alias>
+    <namespace-alias name="OutOfRangeException">OutOfRangeException</namespace-alias>
+    <class final="false" abstract="false" line="50" namespace="Vo">
+      <name>DateRange</name>
+      <extends/>
+      <full_name>\Vo\DateRange</full_name>
+      <docblock>
+        <description>Class to deal with and perform operations on ranges of dates.</description>
+        <long-description>
+</long-description>
+        <tag name="see" description="http://www.martinfowler.com/ap2/range.html" line="42"/>
+        <tag name="category" description="Vo" line="42"/>
+        <tag name="package" description="Vo" line="42"/>
+      </docblock>
+      <constant namespace="Vo" line="57">
+        <name>FUTURE</name>
+        <value>9999-01-01</value>
+        <docblock>
+          <description>Far-future ISO-8601 date</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\string" line="52">
+            <type by_reference="false">\string</type>
+          </tag>
+        </docblock>
+      </constant>
+      <constant namespace="Vo" line="64">
+        <name>PAST</name>
+        <value>1000-01-01</value>
+        <docblock>
+          <description>Far-past ISO-8601 date</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\string" line="59">
+            <type by_reference="false">\string</type>
+          </tag>
+        </docblock>
+      </constant>
+      <property final="false" static="false" visibility="protected" line="72">
+        <name>$start</name>
+        <default/>
+        <docblock>
+          <description>Internal 'start' DateTime</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\DateTime" line="66">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="78">
+        <name>$end</name>
+        <default/>
+        <docblock>
+          <description>Internal 'end' DateTime</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\DateTime" line="73">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="87">
+        <name>__construct</name>
+        <docblock>
+          <description>Constructor</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="Start date" type="\Vo\$start" variable="$start" line="80">
+            <type by_reference="false">\Vo\$start</type>
+          </tag>
+          <tag name="param" description="End date" type="\Vo\$end" variable="$end" line="80">
+            <type by_reference="false">\Vo\$end</type>
+          </tag>
+          <tag name="return" description="" type="\null" line="80">
+            <type by_reference="false">\null</type>
+          </tag>
+        </docblock>
+        <argument line="87">
+          <name>$start</name>
+          <default/>
+          <type>DateTime</type>
+        </argument>
+        <argument line="87">
+          <name>$end</name>
+          <default/>
+          <type>DateTime</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="101">
+        <name>fromIso8601</name>
+        <docblock>
+          <description>Build a DateRange object from an ISO-8601 interval string</description>
+          <long-description>&lt;p&gt;Currently, this only accepts dates of the form Y-m-d/Y-m-d.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="ISO-8601 interval string" type="\string" variable="$string" line="93">
+            <type by_reference="false">\string</type>
+          </tag>
+          <tag name="return" description="" type="\Vo\self" line="93">
+            <type by_reference="false">\Vo\self</type>
+          </tag>
+        </docblock>
+        <argument line="101">
+          <name>$string</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="141">
+        <name>fromData</name>
+        <docblock>
+          <description>Build a DateRange object from existing data</description>
+          <long-description>&lt;p&gt;This accepts an array or object and assumes members 'start' and 'end'
+somewhere in the array or object. You can override these values with
+whatever you like.&lt;/p&gt;
+
+&lt;pre&gt;
+// Example usage
+$array = array('start' =&gt; '2009-05-06', 'end' =&gt; new DateTime('2009-06-07'));
+
+$object = new stdClass();
+$object-&gt;start = '2009-05-06';
+$object-&gt;end = new DateTime('2009-06-07');
+
+$range1 = self::fromData($array);
+$range2 = self::fromData($object);
+&lt;/pre&gt;
+</long-description>
+          <tag name="param" description="" type="\array|\Vo\stdClass" variable="$object" line="117">
+            <type by_reference="false">\array</type>
+            <type by_reference="false">\Vo\stdClass</type>
+          </tag>
+          <tag name="param" description="&amp;#039;Start&amp;#039; member or index name" type="\string" variable="$start" line="117">
+            <type by_reference="false">\string</type>
+          </tag>
+          <tag name="param" description="&amp;#039;End&amp;#039; member or index name" type="\string" variable="$end" line="117">
+            <type by_reference="false">\string</type>
+          </tag>
+          <tag name="return" description="" type="\Vo\self" line="117">
+            <type by_reference="false">\Vo\self</type>
+          </tag>
+        </docblock>
+        <argument line="141">
+          <name>$object</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="141">
+          <name>$start</name>
+          <default>start</default>
+          <type/>
+        </argument>
+        <argument line="141">
+          <name>$end</name>
+          <default>end</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="209">
+        <name>infinite</name>
+        <docblock>
+          <description>Create the infinite date range</description>
+          <long-description>&lt;p&gt;Note: internally, a finite but unusual boundary is used.&lt;/p&gt;
+</long-description>
+          <tag name="return" description="" type="\Vo\self" line="202">
+            <type by_reference="false">\Vo\self</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="220">
+        <name>upTo</name>
+        <docblock>
+          <description>Create a date range with an unbounded past, but a bounded future</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="Upper bound" type="\Vo\$end" variable="$end" line="214">
+            <type by_reference="false">\Vo\$end</type>
+          </tag>
+          <tag name="return" description="" type="\Vo\self" line="214">
+            <type by_reference="false">\Vo\self</type>
+          </tag>
+        </docblock>
+        <argument line="220">
+          <name>$end</name>
+          <default/>
+          <type>DateTime</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="231">
+        <name>startingOn</name>
+        <docblock>
+          <description>Create a date range with an bounded past, but an unbounded future</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="Lower bound" type="\Vo\$start" variable="$start" line="225">
+            <type by_reference="false">\Vo\$start</type>
+          </tag>
+          <tag name="return" description="" type="\Vo\self" line="225">
+            <type by_reference="false">\Vo\self</type>
+          </tag>
+        </docblock>
+        <argument line="231">
+          <name>$start</name>
+          <default/>
+          <type>DateTime</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="241">
+        <name>getStart</name>
+        <docblock>
+          <description>Accessor that returns the start date of this range</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="\DateTime" line="236">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="251">
+        <name>getEnd</name>
+        <docblock>
+          <description>Accessor that returns the end date of this range</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="\DateTime" line="246">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="265">
+        <name>isEmpty</name>
+        <docblock>
+          <description>Test whether this range represents an empty range</description>
+          <long-description>&lt;p&gt;This is primarily used internally, but other methods may set the range
+to empty. This usually signals some kind of error where the return value
+is expected to be a DateRange and can be tested for emptiness.&lt;/p&gt;
+</long-description>
+          <tag name="return" description="" type="\bool" line="256">
+            <type by_reference="false">\bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="276">
+        <name>equals</name>
+        <docblock>
+          <description>Test a DateRange for equality with the current DateRange</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="Other DateRange to test" type="\Vo\$arg" variable="$arg" line="270">
+            <type by_reference="false">\Vo\$arg</type>
+          </tag>
+          <tag name="return" description="" type="\bool" line="270">
+            <type by_reference="false">\bool</type>
+          </tag>
+        </docblock>
+        <argument line="276">
+          <name>$arg</name>
+          <default/>
+          <type>self</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="296">
+        <name>includes</name>
+        <docblock>
+          <description>Test whether this DateRange includes a DateTime or a DateRange</description>
+          <long-description>&lt;p&gt;If a DateTime is greater than or equal to the start of AND less than
+or equal to the end of this DateRange, it is considered included.&lt;/p&gt;
+
+&lt;p&gt;If a DateRange is fully enclosed inside this DateRange, it is
+considered included. The test is essentially the same as for the
+DateTime except it is performed on both the start and end dates of the
+DateRange.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="Other object to test" type="\DateTime|\Vo\self" variable="$arg" line="282">
+            <type by_reference="false">\DateTime</type>
+            <type by_reference="false">\Vo\self</type>
+          </tag>
+          <tag name="return" description="" type="\bool" line="282">
+            <type by_reference="false">\bool</type>
+          </tag>
+        </docblock>
+        <argument line="296">
+          <name>$arg</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="317">
+        <name>overlaps</name>
+        <docblock>
+          <description>Test whether this DateRange overlaps the current DateRange</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="Other DateRange to test" type="\Vo\$arg" variable="$arg" line="311">
+            <type by_reference="false">\Vo\$arg</type>
+          </tag>
+          <tag name="return" description="" type="\bool" line="311">
+            <type by_reference="false">\bool</type>
+          </tag>
+        </docblock>
+        <argument line="317">
+          <name>$arg</name>
+          <default/>
+          <type>self</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="332">
+        <name>gap</name>
+        <docblock>
+          <description>Test whether this date range has a gap and if so, of how many days</description>
+          <long-description>&lt;p&gt;This function will return false if the date ranges overlap.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="Other DateRange to test" type="\Vo\$arg" variable="$arg" line="324">
+            <type by_reference="false">\Vo\$arg</type>
+          </tag>
+          <tag name="return" description="" type="\bool|\int" line="324">
+            <type by_reference="false">\bool</type>
+            <type by_reference="false">\int</type>
+          </tag>
+        </docblock>
+        <argument line="332">
+          <name>$arg</name>
+          <default/>
+          <type>self</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="360">
+        <name>abuts</name>
+        <docblock>
+          <description>Test if the date ranges are next to each other and non-overlapping</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="Other DateRange to test" type="\Vo\$arg" variable="$arg" line="354">
+            <type by_reference="false">\Vo\$arg</type>
+          </tag>
+          <tag name="return" description="" type="\bool" line="354">
+            <type by_reference="false">\bool</type>
+          </tag>
+        </docblock>
+        <argument line="360">
+          <name>$arg</name>
+          <default/>
+          <type>self</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="382">
+        <name>diff</name>
+        <docblock>
+          <description>Take the difference of two date ranges</description>
+          <long-description>&lt;p&gt;The difference of two date ranges in this case means that the overlap of
+the two ranges will be removed from the first range, and the result will
+be returned.&lt;/p&gt;
+
+&lt;p&gt;This method will refuse to bisect the current date range (thus,
+confusingly, creating two date ranges), so the argument date range must
+begin prior to and end during the current date range, or begin during and
+end after the current date range.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="Other DateRange to test" type="\Vo\$arg" variable="$arg" line="366">
+            <type by_reference="false">\Vo\$arg</type>
+          </tag>
+          <tag name="return" description="" type="\Vo\self" line="366">
+            <type by_reference="false">\Vo\self</type>
+          </tag>
+          <tag name="throws" description="" type="\OutOfRangeException" line="366">
+            <type by_reference="false">\OutOfRangeException</type>
+          </tag>
+        </docblock>
+        <argument line="382">
+          <name>$arg</name>
+          <default/>
+          <type>self</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="415">
+        <name>isContiguous</name>
+        <docblock>
+          <description>Test if a series of DateRanges are contiguous</description>
+          <long-description>&lt;p&gt;In other words, test that each of the date ranges 'abut' one another.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="Other DateRanges to test" type="\Vo\$args" variable="$args" line="407">
+            <type by_reference="false">\Vo\$args</type>
+          </tag>
+          <tag name="return" description="" type="\bool" line="407">
+            <type by_reference="false">\bool</type>
+          </tag>
+        </docblock>
+        <argument line="415">
+          <name>$args</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="439">
+        <name>getSeriesStart</name>
+        <docblock>
+          <description>Return the start of a series of DateRanges</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="Other DateRanges to test" type="\Vo\$args" variable="$args" line="433">
+            <type by_reference="false">\Vo\$args</type>
+          </tag>
+          <tag name="return" description="" type="\DateTime" line="433">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+        <argument line="439">
+          <name>$args</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" line="455">
+        <name>getSeriesEnd</name>
+        <docblock>
+          <description>Return the end of a series of DateRanges</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="Other DateRanges to test" type="\Vo\$args" variable="$args" line="449">
+            <type by_reference="false">\Vo\$args</type>
+          </tag>
+          <tag name="return" description="" type="\DateTime" line="449">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+        <argument line="455">
+          <name>$args</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="474">
+        <name>compareTo</name>
+        <docblock>
+          <description>A comparison function for two DateRanges</description>
+          <long-description>&lt;p&gt;Returns either -1, 0, or 1 if the current date range is less than, equal
+to, or greater than the tested date range.&lt;/p&gt;
+</long-description>
+          <tag name="param" description="Other DateRange to test" type="\Vo\$arg" variable="$arg" line="465">
+            <type by_reference="false">\Vo\$arg</type>
+          </tag>
+          <tag name="return" description="" type="\int" line="465">
+            <type by_reference="false">\int</type>
+          </tag>
+        </docblock>
+        <argument line="474">
+          <name>$arg</name>
+          <default/>
+          <type>self</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="494">
+        <name>__toString</name>
+        <docblock>
+          <description>Convert the DateRange to an ISO-8601 interval string</description>
+          <long-description>&lt;p&gt;http://en.wikipedia.org/wiki/ISO_8601#Time_intervals&lt;/p&gt;
+</long-description>
+          <tag name="return" description="" type="\string" line="487">
+            <type by_reference="false">\string</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <package name=""/>
+  <package name="Vo"/>
+  <namespace name="Vo"/>
+  <marker>todo</marker>
+  <marker>fixme</marker>
+</project>

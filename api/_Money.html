@@ -1,0 +1,999 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">Money.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>category</dt>
+<dd>Vo</dd>
+<dt>package</dt>
+<dd>Vo</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CVo%5CMoney">Money</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">PHP Value Objects</p>
+<div class="long-description">
+</div>
+<a name="classes"></a><a id="\Vo\Money"></a><h2 class="class">\Vo\Money<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>category</dt>
+<dd>Vo</dd>
+<dt>package</dt>
+<dd>Vo</dd>
+<dt>see</dt>
+<dd>http://martinfowler.com/eaaCatalog/money.html</dd>
+<dt>Properties</dt>
+<dd><a class="property protected" href="#%5CVo%5CMoney::%24amount">$amount</a></dd>
+<dd><a class="property protected" href="#%5CVo%5CMoney::%24currency">$currency</a></dd>
+<dd><a class="property protected" href="#%5CVo%5CMoney::%24formatter">$formatter</a></dd>
+<dd><a class="property protected" href="#%5CVo%5CMoney::%24scale">$scale</a></dd>
+<dd><a class="property protected" href="#%5CVo%5CMoney::%24defaultFormatter">$defaultFormatter</a></dd>
+<dd><a class="property protected" href="#%5CVo%5CMoney::%24defaultScale">$defaultScale</a></dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CVo%5CMoney::setDefaultFormatter()">setDefaultFormatter</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::setDefaultScale()">setDefaultScale</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::getDefaultFormatter()">getDefaultFormatter</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::getDefaultScale()">getDefaultScale</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::__construct()">__construct</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::getAmount()">getAmount</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::getCurrency()">getCurrency</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::getFormatter()">getFormatter</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::getScale()">getScale</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::setFormatter()">setFormatter</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::setScale()">setScale</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::add()">add</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::div()">div</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::mul()">mul</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::sub()">sub</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::round()">round</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::format()">format</a></dd>
+<dd><a class="method public" href="#%5CVo%5CMoney::__toString()">__toString</a></dd>
+<dd><a class="method protected" href="#%5CVo%5CMoney::assertAndConvertValidMoney()">assertAndConvertValidMoney</a></dd>
+<dd><a class="method protected" href="#%5CVo%5CMoney::operation()">operation</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Money value object</p>
+<div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\Vo\Money::$amount"></a><h4 class="property protected">$amount<div class="to-top"><a href="#%5CVo%5CMoney">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\string <span class="highlight">$amount</span> = ''</code><p class="short-description">Internal amount</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::$currency"></a><h4 class="property protected">$currency<div class="to-top"><a href="#%5CVo%5CMoney">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\string <span class="highlight">$currency</span> = ''</code><p class="short-description">Internal currency as a 3-digit ISO 4217 code</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::$defaultFormatter"></a><h4 class="property protected">$defaultFormatter<div class="to-top"><a href="#%5CVo%5CMoney">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\NumberFormatter <span class="highlight">$defaultFormatter</span> = 'null'</code><p class="short-description">Default currency formatter (requires the intl extension)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\NumberFormatter<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd>null</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::$defaultScale"></a><h4 class="property protected">$defaultScale<div class="to-top"><a href="#%5CVo%5CMoney">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\int <span class="highlight">$defaultScale</span> = '20'</code><p class="short-description">Default scale to use for calculations</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd>20</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>see</dt>
+<dd>http://www.php.net/manual/en/function.bcscale.php</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::$formatter"></a><h4 class="property protected">$formatter<div class="to-top"><a href="#%5CVo%5CMoney">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\NumberFormatter <span class="highlight">$formatter</span> = ''</code><p class="short-description">Currency formatter (requires the intl extension)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\NumberFormatter<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::$scale"></a><h4 class="property protected">$scale<div class="to-top"><a href="#%5CVo%5CMoney">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\int <span class="highlight">$scale</span> = ''</code><p class="short-description">Scale to use for calculations</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>http://www.php.net/manual/en/function.bcscale.php</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Vo\Money::__construct()"></a><h4 class="method public">__construct<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+          \string $amount, \string $currency
+              =
+              USD
+          )
+        </span>
+        :
+        </code><p class="short-description">Constructor</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$amount</dt>
+<dd>\string<br><em></em>
+</dd>
+<dt>$currency</dt>
+<dd>\string<br><em>ISO-4217 code</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::__toString()"></a><h4 class="method public">__toString<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__toString</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>{format()}</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::add()"></a><h4 class="method public">add<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">add</span><span class="nb-faded-text">(
+          \mixed $other
+          )
+        </span>
+        :
+        </code><p class="short-description">Add a number or Money to this object and return a new Money result</p>
+<div class="long-description"><p>If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$other</dt>
+<dd>\mixed<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>throws</dt>
+<dd>if an invalid value is supplied</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::assertAndConvertValidMoney()"></a><h4 class="method protected">assertAndConvertValidMoney<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">assertAndConvertValidMoney</span><span class="nb-faded-text">(
+          \mixed $money
+          )
+        </span>
+        :
+        <a href="_Money.html#%5CVo%5CMoney">\Vo\Money</a></code><p class="short-description">Asserts the validity of a given value and converts it to a Money object</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$money</dt>
+<dd>\mixed<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_Money.html#%5CVo%5CMoney">\Vo\Money</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>throws</dt>
+<dd>if a value is not valid money</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::div()"></a><h4 class="method public">div<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">div</span><span class="nb-faded-text">(
+          \mixed $other
+          )
+        </span>
+        :
+        </code><p class="short-description">Divide a number or Money into this object and return a new Money result</p>
+<div class="long-description"><p>If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$other</dt>
+<dd>\mixed<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>throws</dt>
+<dd>if an invalid value is supplied</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::format()"></a><h4 class="method public">format<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">format</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \string</code><p class="short-description">Format the number and currency according to the current formatter</p>
+<div class="long-description"><p>For example, if the currency is USD and the value is 42.123, this will
+output "$42.12".</p>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::getAmount()"></a><h4 class="method public">getAmount<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getAmount</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \string</code><p class="short-description">Get the internal amount</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::getCurrency()"></a><h4 class="method public">getCurrency<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getCurrency</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \string</code><p class="short-description">Get the internal currency as an ISO-4217 code</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::getDefaultFormatter()"></a><h4 class="method public">getDefaultFormatter<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getDefaultFormatter</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \NumberFormatter</code><p class="short-description">Get the default formatter</p>
+<div class="long-description"><p>This will create a formatter based on the Locale default if one is not
+set prior to this method being called.</p>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\NumberFormatter</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::getDefaultScale()"></a><h4 class="method public">getDefaultScale<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getDefaultScale</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \int</code><p class="short-description">Get the default scale to use for calculations</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\int</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::getFormatter()"></a><h4 class="method public">getFormatter<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getFormatter</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \NumberFormatter</code><p class="short-description">Get the internal number formatter</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\NumberFormatter</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::getScale()"></a><h4 class="method public">getScale<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getScale</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \int</code><p class="short-description">Get the scale used in calculations for this object</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\int</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::mul()"></a><h4 class="method public">mul<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">mul</span><span class="nb-faded-text">(
+          \mixed $other
+          )
+        </span>
+        :
+        </code><p class="short-description">Multiply a number or Money by this object and return a new Money result</p>
+<div class="long-description"><p>If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$other</dt>
+<dd>\mixed<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>throws</dt>
+<dd>if an invalid value is supplied</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::operation()"></a><h4 class="method protected">operation<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">operation</span><span class="nb-faded-text">(
+          \string $func, \Vo\$other $other
+          )
+        </span>
+        :
+        <a href="_Money.html#%5CVo%5CMoney">\Vo\Money</a></code><p class="short-description">Generic function to perform a BC math operation</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$func</dt>
+<dd>\string<br><em>a valid BC math function</em>
+</dd>
+<dt>$other</dt>
+<dd>\Vo\$other<br><em>second value to use in the operation</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_Money.html#%5CVo%5CMoney">\Vo\Money</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::round()"></a><h4 class="method public">round<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">round</span><span class="nb-faded-text">(
+          \int $precision
+          )
+        </span>
+        :
+        \string</code><p class="short-description">Round the internal amount at the specified precision</p>
+<div class="long-description"><p>Note that the value returned is a string. This is a function of the BC
+library and allows large numbers to be represented.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$precision</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::setDefaultFormatter()"></a><h4 class="method public">setDefaultFormatter<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setDefaultFormatter</span><span class="nb-faded-text">(
+           $formatter
+          )
+        </span>
+        :
+        \void</code><p class="short-description">Set the default formatter</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$formatter</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\void</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::setDefaultScale()"></a><h4 class="method public">setDefaultScale<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setDefaultScale</span><span class="nb-faded-text">(
+          \int $scale
+          )
+        </span>
+        :
+        \void</code><p class="short-description">Set the default scale to use for calculations</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$scale</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\void</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::setFormatter()"></a><h4 class="method public">setFormatter<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setFormatter</span><span class="nb-faded-text">(
+           $formatter
+          )
+        </span>
+        :
+        <a href="_Money.html#%5CVo%5CMoney">\Vo\Money</a></code><p class="short-description">Set the internal number formatter</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$formatter</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_Money.html#%5CVo%5CMoney">\Vo\Money</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::setScale()"></a><h4 class="method public">setScale<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setScale</span><span class="nb-faded-text">(
+          \int $value
+          )
+        </span>
+        :
+        <a href="_Money.html#%5CVo%5CMoney">\Vo\Money</a></code><p class="short-description">Set the scale used in calculations for this object</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$value</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_Money.html#%5CVo%5CMoney">\Vo\Money</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Vo\Money::sub()"></a><h4 class="method public">sub<div class="to-top"><a href="#Money">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">sub</span><span class="nb-faded-text">(
+          \mixed $other
+          )
+        </span>
+        :
+        </code><p class="short-description">Subtract a number or Money from this object and return a new Money result</p>
+<div class="long-description"><p>If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$other</dt>
+<dd>\mixed<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>throws</dt>
+<dd>if an invalid value is supplied</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.0</a>.
+    </small></body></html>

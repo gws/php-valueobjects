@@ -2,14 +2,16 @@
 
 namespace VoTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use NumberFormatter,
+    PHPUnit_Framework_TestCase as TestCase,
+    Vo\Money;
 
 class MoneyTest extends TestCase
 {
     public function testAddTwoSmallNumbers()
     {
-        $m1 = new \Vo\Money(123.45);
-        $m2 = new \Vo\Money(678.90);
+        $m1 = new Money(123.45);
+        $m2 = new Money(678.90);
 
         $this->assertSame(
             '802.35000000000000000000',
@@ -19,9 +21,9 @@ class MoneyTest extends TestCase
 
     public function testAddThreeSmallNumbers()
     {
-        $m1 = new \Vo\Money(123.45);
-        $m2 = new \Vo\Money(678.90);
-        $m3 = new \Vo\Money(987.65);
+        $m1 = new Money(123.45);
+        $m2 = new Money(678.90);
+        $m3 = new Money(987.65);
 
         $this->assertSame(
             '1790.00000000000000000000',
@@ -31,8 +33,8 @@ class MoneyTest extends TestCase
 
     public function testAddLarge()
     {
-        $m1 = new \Vo\Money('1234567890123456789.123456789');
-        $m2 = new \Vo\Money('9876543210987654321.987654321');
+        $m1 = new Money('1234567890123456789.123456789');
+        $m2 = new Money('9876543210987654321.987654321');
 
         $this->assertSame(
             '11111111101111111111.11111111000000000000',
@@ -42,8 +44,8 @@ class MoneyTest extends TestCase
 
     public function testSubTwoSmallNumbers()
     {
-        $m1 = new \Vo\Money(123.45);
-        $m2 = new \Vo\Money(678.90);
+        $m1 = new Money(123.45);
+        $m2 = new Money(678.90);
 
         $this->assertSame(
             '-555.45000000000000000000',
@@ -53,9 +55,9 @@ class MoneyTest extends TestCase
 
     public function testSubThreeSmallNumbers()
     {
-        $m1 = new \Vo\Money(123.45);
-        $m2 = new \Vo\Money(678.90);
-        $m3 = new \Vo\Money(987.65);
+        $m1 = new Money(123.45);
+        $m2 = new Money(678.90);
+        $m3 = new Money(987.65);
 
         $this->assertSame(
             '-1543.10000000000000000000',
@@ -65,8 +67,8 @@ class MoneyTest extends TestCase
 
     public function testSubLarge()
     {
-        $m1 = new \Vo\Money('1234567890123456789.123456789');
-        $m2 = new \Vo\Money('9876543210987654321.987654321');
+        $m1 = new Money('1234567890123456789.123456789');
+        $m2 = new Money('9876543210987654321.987654321');
 
         $this->assertSame(
             '-8641975320864197532.86419753200000000000',
@@ -76,8 +78,8 @@ class MoneyTest extends TestCase
 
     public function testDivTwoSmallNumbers()
     {
-        $m1 = new \Vo\Money(123.45);
-        $m2 = new \Vo\Money(678.90);
+        $m1 = new Money(123.45);
+        $m2 = new Money(678.90);
 
         $this->assertSame(
             '0.18183826778612461334',
@@ -87,9 +89,9 @@ class MoneyTest extends TestCase
 
     public function testDivThreeSmallNumbers()
     {
-        $m1 = new \Vo\Money(123.45);
-        $m2 = new \Vo\Money(678.90);
-        $m3 = new \Vo\Money(987.65);
+        $m1 = new Money(123.45);
+        $m2 = new Money(678.90);
+        $m3 = new Money(987.65);
 
         $this->assertSame(
             '0.00018411205162367702',
@@ -99,8 +101,8 @@ class MoneyTest extends TestCase
 
     public function testDivLarge()
     {
-        $m1 = new \Vo\Money('1234567890123456789.123456789');
-        $m2 = new \Vo\Money('9876543210987654321.987654321');
+        $m1 = new Money('1234567890123456789.123456789');
+        $m2 = new Money('9876543210987654321.987654321');
 
         $this->assertSame(
             '0.12499999886093750001',
@@ -110,8 +112,8 @@ class MoneyTest extends TestCase
 
     public function testMulTwoSmallNumbers()
     {
-        $m1 = new \Vo\Money(123.45);
-        $m2 = new \Vo\Money(678.90);
+        $m1 = new Money(123.45);
+        $m2 = new Money(678.90);
 
         $this->assertSame(
             '83810.205',
@@ -121,9 +123,9 @@ class MoneyTest extends TestCase
 
     public function testMulThreeSmallNumbers()
     {
-        $m1 = new \Vo\Money(123.45);
-        $m2 = new \Vo\Money(678.90);
-        $m3 = new \Vo\Money(987.65);
+        $m1 = new Money(123.45);
+        $m2 = new Money(678.90);
+        $m3 = new Money(987.65);
 
         $this->assertSame(
             '82775148.96825',
@@ -133,8 +135,8 @@ class MoneyTest extends TestCase
 
     public function testMulLarge()
     {
-        $m1 = new \Vo\Money('1234567890123456789.123456789');
-        $m2 = new \Vo\Money('9876543210987654321.987654321');
+        $m1 = new Money('1234567890123456789.123456789');
+        $m2 = new Money('9876543210987654321.987654321');
 
         $this->assertSame(
             '12193263113702179524813290633609205911.347203169112635269',
@@ -144,7 +146,7 @@ class MoneyTest extends TestCase
 
     public function testRound()
     {
-        $m = new \Vo\Money('12193263113702179524813290633609205911.347203169112635269');
+        $m = new Money('12193263113702179524813290633609205911.347203169112635269');
 
         $map = array(
             0 =>  '12193263113702179524813290633609205911',
@@ -167,8 +169,8 @@ class MoneyTest extends TestCase
      */
     public function testAddCurrencyMismatch()
     {
-        $m1 = new \Vo\Money(45, 'EUR');
-        $m2 = new \Vo\Money(50, 'USD');
+        $m1 = new Money(45, 'EUR');
+        $m2 = new Money(50, 'USD');
 
         $m2->add($m1);
     }
@@ -178,8 +180,8 @@ class MoneyTest extends TestCase
      */
     public function testDivCurrencyMismatch()
     {
-        $m1 = new \Vo\Money(45, 'EUR');
-        $m2 = new \Vo\Money(50, 'USD');
+        $m1 = new Money(45, 'EUR');
+        $m2 = new Money(50, 'USD');
 
         $m2->div($m1);
     }
@@ -189,8 +191,8 @@ class MoneyTest extends TestCase
      */
     public function testMulCurrencyMismatch()
     {
-        $m1 = new \Vo\Money(45, 'EUR');
-        $m2 = new \Vo\Money(50, 'USD');
+        $m1 = new Money(45, 'EUR');
+        $m2 = new Money(50, 'USD');
 
         $m2->mul($m1);
     }
@@ -200,18 +202,18 @@ class MoneyTest extends TestCase
      */
     public function testSubCurrencyMismatch()
     {
-        $m1 = new \Vo\Money(45, 'EUR');
-        $m2 = new \Vo\Money(50, 'USD');
+        $m1 = new Money(45, 'EUR');
+        $m2 = new Money(50, 'USD');
 
         $m2->sub($m1);
     }
 
     public function testFormatPositiveUSDInEnUs()
     {
-        $m = new \Vo\Money(1077.701, 'USD');
-        $m->setFormatter(new \NumberFormatter(
+        $m = new Money(1077.701, 'USD');
+        $m->setFormatter(new NumberFormatter(
             'en-US',
-            \NumberFormatter::CURRENCY
+            NumberFormatter::CURRENCY
         ));
 
         $this->assertSame(
@@ -222,10 +224,10 @@ class MoneyTest extends TestCase
 
     public function testNegativeFormatUSDInEnUs()
     {
-        $m = new \Vo\Money('-1077.701', 'USD');
-        $m->setFormatter(new \NumberFormatter(
+        $m = new Money('-1077.701', 'USD');
+        $m->setFormatter(new NumberFormatter(
             'en-US',
-            \NumberFormatter::CURRENCY
+            NumberFormatter::CURRENCY
         ));
 
         $this->assertSame(
@@ -236,10 +238,10 @@ class MoneyTest extends TestCase
 
     public function testPositiveFormatEURInEnUs()
     {
-        $m = new \Vo\Money(1077.701, 'EUR');
-        $m->setFormatter(new \NumberFormatter(
+        $m = new Money(1077.701, 'EUR');
+        $m->setFormatter(new NumberFormatter(
             'en-US',
-            \NumberFormatter::CURRENCY
+            NumberFormatter::CURRENCY
         ));
 
         $this->assertSame(
@@ -250,10 +252,10 @@ class MoneyTest extends TestCase
 
     public function testNegativeFormatEURInEnUs()
     {
-        $m = new \Vo\Money('-1077.701', 'EUR');
-        $m->setFormatter(new \NumberFormatter(
+        $m = new Money('-1077.701', 'EUR');
+        $m->setFormatter(new NumberFormatter(
             'en-US',
-            \NumberFormatter::CURRENCY
+            NumberFormatter::CURRENCY
         ));
 
         $this->assertSame(
@@ -264,10 +266,10 @@ class MoneyTest extends TestCase
 
     public function testPositiveFormatEURInDeDe()
     {
-        $m = new \Vo\Money(1077.701, 'EUR');
-        $m->setFormatter(new \NumberFormatter(
+        $m = new Money(1077.701, 'EUR');
+        $m->setFormatter(new NumberFormatter(
             'de-DE',
-            \NumberFormatter::CURRENCY
+            NumberFormatter::CURRENCY
         ));
 
         $this->assertSame(

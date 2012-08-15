@@ -3,7 +3,8 @@
 namespace VoTest;
 
 use InvalidArgumentException,
-    PHPUnit_Framework_TestCase as TestCase;
+    PHPUnit_Framework_TestCase as TestCase,
+    Vo\Ip;
 
 class IpTest extends TestCase
 {
@@ -13,7 +14,7 @@ class IpTest extends TestCase
     public function testCreation($raw, $is_valid)
     {
         try {
-            $mac = new \Vo\Ip($raw);
+            $mac = new Ip($raw);
         } catch (InvalidArgumentException $e) {
             if (!$is_valid)
                 return;
@@ -25,7 +26,7 @@ class IpTest extends TestCase
     public function testFormat()
     {
         $raw = '200.199.198.197';
-        $ip = new \Vo\Ip($raw);
+        $ip = new Ip($raw);
 
         $this->assertEquals(
             $raw,
@@ -33,7 +34,7 @@ class IpTest extends TestCase
         );
 
         $raw = '2001:420:dead:beef:babe:0420:4:5';
-        $ip = new \Vo\Ip($raw);
+        $ip = new Ip($raw);
 
         $this->assertEquals(
             '2001:420:dead:beef:babe:420:4:5',
@@ -46,7 +47,7 @@ class IpTest extends TestCase
      */
     public function testFromIntegerArray($array, $presentation)
     {
-        $ip = \Vo\Ip::fromIntegerArray($array);
+        $ip = Ip::fromIntegerArray($array);
 
         $this->assertEquals(
             $presentation,
@@ -59,7 +60,7 @@ class IpTest extends TestCase
      */
     public function testToIntegerArray($array, $presentation)
     {
-        $ip = new \Vo\Ip($presentation);
+        $ip = new Ip($presentation);
 
         $this->assertEquals(
             $array,
@@ -69,14 +70,14 @@ class IpTest extends TestCase
 
     public function testGetVersion()
     {
-        $ip = new \Vo\Ip('200.193.104.32');
+        $ip = new Ip('200.193.104.32');
 
         $this->assertEquals(
             4,
             $ip->getVersion()
         );
 
-        $ip = new \Vo\Ip('2001:304:234a::1');
+        $ip = new Ip('2001:304:234a::1');
 
         $this->assertEquals(
             6,
@@ -86,32 +87,32 @@ class IpTest extends TestCase
 
     public function testIsInNetwork()
     {
-        $ip = new \Vo\Ip('2001:304:234a::1');
+        $ip = new Ip('2001:304:234a::1');
 
         $this->assertEquals(
             true,
-            $ip->isInNetwork(new \Vo\Ip('2001:304:234a::'), 48)
+            $ip->isInNetwork(new Ip('2001:304:234a::'), 48)
         );
 
-        $ip = new \Vo\Ip('2001:304:234b::1');
+        $ip = new Ip('2001:304:234b::1');
 
         $this->assertEquals(
             false,
-            $ip->isInNetwork(new \Vo\Ip('2001:304:234a::'), 48)
+            $ip->isInNetwork(new Ip('2001:304:234a::'), 48)
         );
 
-        $ip = new \Vo\Ip('127.2.4.5');
+        $ip = new Ip('127.2.4.5');
 
         $this->assertEquals(
             true,
-            $ip->isInNetwork(new \Vo\Ip('127.2.3.4'), 16)
+            $ip->isInNetwork(new Ip('127.2.3.4'), 16)
         );
 
-        $ip = new \Vo\Ip('127.2.127.9');
+        $ip = new Ip('127.2.127.9');
 
         $this->assertEquals(
             false,
-            $ip->isInNetwork(new \Vo\Ip('127.2.128.0'), 17)
+            $ip->isInNetwork(new Ip('127.2.128.0'), 17)
         );
     }
 

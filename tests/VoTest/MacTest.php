@@ -3,7 +3,8 @@
 namespace VoTest;
 
 use InvalidArgumentException,
-    PHPUnit_Framework_TestCase as TestCase;
+    PHPUnit_Framework_TestCase as TestCase,
+    Vo\Mac;
 
 class MacTest extends TestCase
 {
@@ -13,7 +14,7 @@ class MacTest extends TestCase
     public function testCreation($raw, $is_valid)
     {
         try {
-            $mac = new \Vo\Mac($raw);
+            $mac = new Mac($raw);
         } catch (InvalidArgumentException $e) {
             if (!$is_valid)
                 return;
@@ -25,7 +26,7 @@ class MacTest extends TestCase
     public function testFormatting()
     {
         $raw = '00-fa-22-33-44-55';
-        $mac = new \Vo\Mac($raw);
+        $mac = new Mac($raw);
 
         $this->assertEquals(
             '00fa22334455',
@@ -61,7 +62,7 @@ class MacTest extends TestCase
     public function testToString()
     {
         $raw = '00-fa-22-33-44-55';
-        $mac = new \Vo\Mac($raw);
+        $mac = new Mac($raw);
 
         $this->assertEquals(
             '00fa22334455',

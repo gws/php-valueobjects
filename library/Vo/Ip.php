@@ -1,38 +1,12 @@
 <?php
-
 /**
  * PHP Value Objects
  *
- * @category Vo
- * @package Vo
- */
-
-/**
- * Copyright 2011 Gordon Stratton. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of
- *    conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list
- *    of conditions and the following disclaimer in the documentation and/or other materials
- *    provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY GORDON STRATTON ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL GORDON STRATTON OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of Gordon Stratton.
+ * @author    Gordon Stratton <gordon.stratton@gmail.com>
+ * @copyright 2011-2012 Gordon Stratton
+ * @license   http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause
+ * @link      https://github.com/strattg/php-valueobjects
+ * @package   ValueObjects
  */
 
 namespace Vo;
@@ -44,8 +18,7 @@ use InvalidArgumentException;
  *
  * This class supports both IPv4 and IPv6 addresses.
  *
- * @category Vo
- * @package Vo
+ * @package ValueObjects
  */
 class Ip
 {
@@ -64,9 +37,7 @@ class Ip
     protected $version;
 
     /**
-     * Constructor
-     *
-     * Accepts an IPv4 or an IPv6 address in any valid format.
+     * Accepts a string representation of an IP address and create an IP object
      *
      * @param string $raw Raw IP address
      */
@@ -94,14 +65,14 @@ class Ip
     }
 
     /**
-     * Constructs an Ip object from an array of integers
+     * Creates an IP object from an array of integers
      *
      * One likely use for this is to store an IP address in a database in an
      * address-agnostic fashion.
      *
      * Note: The array of integers must be most-significant-integer first
      *
-     * @param $integers Integer array, most-significant first
+     * @param  array $integers Integer array, most-significant first
      * @return Ip
      */
     public static function fromIntegerArray(array $integers)
@@ -124,7 +95,7 @@ class Ip
     }
 
     /**
-     * Formats the IP address using inet_ntop
+     * Formats the IP address using {@link inet_ntop}
      *
      * @return string
      */
@@ -134,7 +105,7 @@ class Ip
     }
 
     /**
-     * Marshals an Ip object to an array of integers
+     * Marshals an IP object to an array of integers
      *
      * One likely use for this is to store an IP address in a database in an
      * address-agnostic fashion.
@@ -171,8 +142,8 @@ class Ip
      *
      * Accepts a network base address and a prefix length.
      *
-     * @param $base Base address for the network to test
-     * @param int $prefixlen Prefix length to test
+     * @param  Ip   $base      Base address for the network to test
+     * @param  int  $prefixlen Prefix length to test
      * @return bool
      */
     public function isInNetwork(Ip $base, $prefixlen)
@@ -260,7 +231,8 @@ class Ip
     }
 
     /**
-     * @see format()
+     * Formats the IP object according to @see {format()}
+     *
      * @return string
      */
     public function __toString()

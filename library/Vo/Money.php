@@ -1,49 +1,25 @@
 <?php
-
 /**
  * PHP Value Objects
  *
- * @category Vo
- * @package Vo
- */
-
-/**
- * Copyright 2011 Gordon Stratton. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of
- *    conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list
- *    of conditions and the following disclaimer in the documentation and/or other materials
- *    provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY GORDON STRATTON ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL GORDON STRATTON OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of Gordon Stratton.
+ * @author    Gordon Stratton <gordon.stratton@gmail.com>
+ * @copyright 2011-2012 Gordon Stratton
+ * @license   http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause
+ * @link      https://github.com/strattg/php-valueobjects
+ * @package   ValueObjects
  */
 
 namespace Vo;
 
+use Locale,
+    NumberFormatter,
+    InvalidArgumentException;
+
 /**
  * Money value object
  *
- * @see http://martinfowler.com/eaaCatalog/money.html
- *
- * @category Vo
- * @package Vo
+ * @see     http://martinfowler.com/eaaCatalog/money.html
+ * @package ValueObjects
  */
 class Money
 {
@@ -64,7 +40,7 @@ class Money
     /**
      * Currency formatter (requires the intl extension)
      *
-     * @var \NumberFormatter
+     * @var NumberFormatter
      */
     protected $formatter;
 
@@ -72,14 +48,14 @@ class Money
      * Scale to use for calculations
      *
      * @var int
-     * @see http://www.php.net/manual/en/function.bcscale.php
+     * @link http://www.php.net/manual/en/function.bcscale.php
      */
     protected $scale;
 
     /**
      * Default currency formatter (requires the intl extension)
      *
-     * @var \NumberFormatter
+     * @var NumberFormatter
      */
     protected static $defaultFormatter = null;
 
@@ -94,10 +70,9 @@ class Money
     /**
      * Set the default formatter
      *
-     * @param $formatter
-     * @return void
+     * @param  NumberFormatter $formatter
      */
-    public static function setDefaultFormatter(\NumberFormatter $formatter)
+    public static function setDefaultFormatter(NumberFormatter $formatter)
     {
         self::$defaultFormatter = $formatter;
     }
@@ -106,11 +81,10 @@ class Money
      * Set the default scale to use for calculations
      *
      * @param int $scale
-     * @return void
      */
     public static function setDefaultScale($scale)
     {
-        self::$defaultScale = (int)$scale;
+        self::$defaultScale = (int) $scale;
     }
 
     /**
@@ -119,15 +93,15 @@ class Money
      * This will create a formatter based on the Locale default if one is not
      * set prior to this method being called.
      *
-     * @return \NumberFormatter
+     * @return NumberFormatter
      */
     public static function getDefaultFormatter()
     {
         if (null === self::$defaultFormatter) {
             self::setDefaultFormatter(
-                new \NumberFormatter(
-                    \Locale::getDefault(),
-                    \NumberFormatter::CURRENCY
+                new NumberFormatter(
+                    Locale::getDefault(),
+                    NumberFormatter::CURRENCY
                 )
             );
         }
@@ -182,7 +156,7 @@ class Money
     /**
      * Get the internal number formatter
      *
-     * @return \NumberFormatter
+     * @return NumberFormatter
      */
     public function getFormatter()
     {
@@ -202,10 +176,10 @@ class Money
     /**
      * Set the internal number formatter
      *
-     * @param $formatter
+     * @param  NumberFormatter $formatter
      * @return Money
      */
-    public function setFormatter(\NumberFormatter $formatter)
+    public function setFormatter(NumberFormatter $formatter)
     {
         $this->formatter = $formatter;
 
@@ -215,12 +189,12 @@ class Money
     /**
      * Set the scale used in calculations for this object
      *
-     * @param int $value
+     * @param  int   $value
      * @return Money
      */
     public function setScale($value)
     {
-        $this->scale = (int)$value;
+        $this->scale = (int) $value;
 
         return $this;
     }
@@ -231,8 +205,8 @@ class Money
      * If you supply a non-Money value, it will be checked to verify that it
      * looks like a number, and automatically converted to a Money object.
      *
-     * @param mixed $other
-     * @throws \InvalidArgumentException if an invalid value is supplied
+     * @param  mixed                     $other
+     * @throws InvalidArgumentException  if an invalid value is supplied
      */
     public function add($other)
     {
@@ -245,8 +219,8 @@ class Money
      * If you supply a non-Money value, it will be checked to verify that it
      * looks like a number, and automatically converted to a Money object.
      *
-     * @param mixed $other
-     * @throws \InvalidArgumentException if an invalid value is supplied
+     * @param  mixed                     $other
+     * @throws InvalidArgumentException  if an invalid value is supplied
      */
     public function div($other)
     {
@@ -259,8 +233,8 @@ class Money
      * If you supply a non-Money value, it will be checked to verify that it
      * looks like a number, and automatically converted to a Money object.
      *
-     * @param mixed $other
-     * @throws \InvalidArgumentException if an invalid value is supplied
+     * @param  mixed                     $other
+     * @throws InvalidArgumentException  if an invalid value is supplied
      */
     public function mul($other)
     {
@@ -273,8 +247,8 @@ class Money
      * If you supply a non-Money value, it will be checked to verify that it
      * looks like a number, and automatically converted to a Money object.
      *
-     * @param mixed $other
-     * @throws \InvalidArgumentException if an invalid value is supplied
+     * @param  mixed                     $other
+     * @throws InvalidArgumentException  if an invalid value is supplied
      */
     public function sub($other)
     {
@@ -287,7 +261,7 @@ class Money
      * Note that the value returned is a string. This is a function of the BC
      * library and allows large numbers to be represented.
      *
-     * @param int $precision
+     * @param  int    $precision
      * @return string
      */
     public function round($precision)
@@ -331,7 +305,9 @@ class Money
     }
 
     /**
-     * @see {format()}
+     * Format the Money object according to {@see format()}
+     *
+     * @see format()
      */
     public function __toString()
     {
@@ -341,9 +317,9 @@ class Money
     /**
      * Asserts the validity of a given value and converts it to a Money object
      *
-     * @param mixed $money
+     * @param  mixed                     $money
      * @return Money
-     * @throws \InvalidArgumentException if a value is not valid money
+     * @throws InvalidArgumentException  if a value is not valid money
      */
     protected function assertAndConvertValidMoney($money)
     {
@@ -355,14 +331,14 @@ class Money
             );
         } else {
             if (!$money instanceof Money) {
-                throw new \InvalidArgumentException(
+                throw new InvalidArgumentException(
                     'Value must be either numeric or an instance of Money'
                 );
             }
         }
 
         if ($this->getCurrency() !== $money->getCurrency()) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Value must be of the same currency as ' . $this->getCurrency()
             );
         }
@@ -373,8 +349,8 @@ class Money
     /**
      * Generic function to perform a BC math operation
      *
-     * @param string $func a valid BC math function
-     * @param $other second value to use in the operation
+     * @param  string $func  a valid BC math function
+     * @param  mixed  $other second value to use in the operation
      * @return Money
      */
     protected function operation($func, $other)

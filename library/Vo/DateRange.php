@@ -1,51 +1,25 @@
 <?php
-
 /**
  * PHP Value Objects
  *
- * @category Vo
- * @package Vo
- */
-
-/**
- * Copyright 2011 Gordon Stratton. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this list of
- *    conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list
- *    of conditions and the following disclaimer in the documentation and/or other materials
- *    provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY GORDON STRATTON ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL GORDON STRATTON OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of Gordon Stratton.
+ * @author    Gordon Stratton <gordon.stratton@gmail.com>
+ * @copyright 2011-2012 Gordon Stratton
+ * @license   http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause
+ * @link      https://github.com/strattg/php-valueobjects
+ * @package   ValueObjects
  */
 
 namespace Vo;
 
-use DateTime, InvalidArgumentException, OutOfRangeException;
+use DateTime,
+    InvalidArgumentException,
+    OutOfRangeException;
 
 /**
  * Class to deal with and perform operations on ranges of dates.
  *
- * @see http://www.martinfowler.com/ap2/range.html
- *
- * @category Vo
- * @package Vo
+ * @link    http://www.martinfowler.com/eeaDev/Range.html
+ * @package ValueObjects
  */
 class DateRange
 {
@@ -78,11 +52,10 @@ class DateRange
     protected $end;
 
     /**
-     * Constructor
+     * Create a DateRange from a start date and an end date
      *
-     * @param $start Start date
-     * @param $end End date
-     * @return null
+     * @param DateTime $start Start date
+     * @param DateTime $end   End date
      */
     public function __construct(DateTime $start, DateTime $end)
     {
@@ -95,8 +68,8 @@ class DateRange
      *
      * Currently, this only accepts dates of the form Y-m-d/Y-m-d.
      *
-     * @param string $string ISO-8601 interval string
-     * @return self
+     * @param  string $string ISO-8601 interval string
+     * @return DateRange
      */
     public static function fromIso8601($string)
     {
@@ -108,7 +81,7 @@ class DateRange
             );
         }
 
-        return new self(
+        return new static(
             new DateTime($split[0]),
             new DateTime($split[1])
         );
@@ -129,14 +102,14 @@ class DateRange
      * $object->start = '2009-05-06';
      * $object->end = new DateTime('2009-06-07');
      *
-     * $range1 = self::fromData($array);
-     * $range2 = self::fromData($object);
+     * $range1 = DateRange::fromData($array);
+     * $range2 = DateRange::fromData($object);
      * </pre>
      *
-     * @param array|stdClass $object
-     * @param string $start 'Start' member or index name
-     * @param string $end 'End' member or index name
-     * @return self
+     * @param  array|object   $object
+     * @param  string         $start  'Start' member or index name
+     * @param  string         $end    'End' member or index name
+     * @return DateRange
      */
     public static function fromData($object, $start = 'start', $end = 'end')
     {
@@ -187,13 +160,13 @@ class DateRange
         }
 
         if (is_null($start_dt) && is_null($end_dt)) {
-            $date_range = self::infinite();
+            $date_range = static::infinite();
         } elseif (is_null($start_dt)) {
-            $date_range = self::upTo($end_dt);
+            $date_range = static::upTo($end_dt);
         } elseif (is_null($end_dt)) {
-            $date_range = self::startingOn($start_dt);
+            $date_range = static::startingOn($start_dt);
         } else {
-            $date_range = new self($start_dt, $end_dt);
+            $date_range = new static($start_dt, $end_dt);
         }
 
         return $date_range;
@@ -204,33 +177,33 @@ class DateRange
      *
      * Note: internally, a finite but unusual boundary is used.
      *
-     * @return self
+     * @return DateRange
      */
     public static function infinite()
     {
-        return new self(new DateTime(self::PAST), new DateTime(self::FUTURE));
+        return new static(new DateTime(static::PAST), new DateTime(static::FUTURE));
     }
 
     /**
      * Create a date range with an unbounded past, but a bounded future
      *
-     * @param $end Upper bound
-     * @return self
+     * @param  DateTime $end Upper bound
+     * @return DateRange
      */
     public static function upTo(DateTime $end)
     {
-        return new self(new DateTime(self::PAST), $end);
+        return new static(new DateTime(static::PAST), $end);
     }
 
     /**
      * Create a date range with an bounded past, but an unbounded future
      *
-     * @param $start Lower bound
-     * @return self
+     * @param  DateTime $start Lower bound
+     * @return DateRange
      */
     public static function startingOn(DateTime $start)
     {
-        return new self($start, new DateTime(self::FUTURE));
+        return new static($start, new DateTime(static::FUTURE));
     }
 
     /**
@@ -270,10 +243,10 @@ class DateRange
     /**
      * Test a DateRange for equality with the current DateRange
      *
-     * @param $arg Other DateRange to test
+     * @param  DateRange $arg Other DateRange to test
      * @return bool
      */
-    public function equals(self $arg)
+    public function equals(DateRange $arg)
     {
         return $this->getStart() == $arg->getStart()
             && $this->getEnd() == $arg->getEnd();
@@ -290,7 +263,7 @@ class DateRange
      * DateTime except it is performed on both the start and end dates of the
      * DateRange.
      *
-     * @param DateTime|self $arg Other object to test
+     * @param  DateTime|DateRange $arg Other object to test
      * @return bool
      */
     public function includes($arg)
@@ -298,7 +271,7 @@ class DateRange
         if ($arg instanceof DateTime) {
             return $this->getStart() <= $arg
                 && $this->getEnd() >= $arg;
-        } elseif ($arg instanceof self) {
+        } elseif ($arg instanceof DateRange) {
             return $this->includes($arg->getStart())
                 && $this->includes($arg->getEnd());
         } else {
@@ -311,10 +284,10 @@ class DateRange
     /**
      * Test whether this DateRange overlaps the current DateRange
      *
-     * @param $arg Other DateRange to test
+     * @param  DateRange $arg Other DateRange to test
      * @return bool
      */
-    public function overlaps(self $arg)
+    public function overlaps(DateRange $arg)
     {
         return $arg->includes($this->getStart())
             || $arg->includes($this->getEnd())
@@ -326,10 +299,10 @@ class DateRange
      *
      * This function will return false if the date ranges overlap.
      *
-     * @param $arg Other DateRange to test
-     * @return bool|int
+     * @param  DateRange $arg Other DateRange to test
+     * @return false|int
      */
-    public function gap(self $arg)
+    public function gap(DateRange $arg)
     {
         if ($this->overlaps($arg)) {
             return false;
@@ -354,10 +327,10 @@ class DateRange
     /**
      * Test if the date ranges are next to each other and non-overlapping
      *
-     * @param $arg Other DateRange to test
+     * @param  DateRange $arg Other DateRange to test
      * @return bool
      */
-    public function abuts(self $arg)
+    public function abuts(DateRange $arg)
     {
         return !$this->overlaps($arg)
             && $this->gap($arg) === 0;
@@ -375,11 +348,11 @@ class DateRange
      * begin prior to and end during the current date range, or begin during and
      * end after the current date range.
      *
-     * @param $arg Other DateRange to test
-     * @return self
+     * @param  DateRange $arg Other DateRange to test
+     * @return DateRange
      * @throws OutOfRangeException
      */
-    public function diff(self $arg)
+    public function diff(DateRange $arg)
     {
         if (!$this->overlaps($arg)) {
             throw new OutOfRangeException('Argument must overlap this range');
@@ -392,13 +365,13 @@ class DateRange
         }
 
         if ($this->getStart() < $arg->getStart()) {
-            return new self(
+            return new static(
                 clone $this->getStart(),
                 date_modify(clone $arg->getStart(), '-1 day')
             );
         }
 
-        return new self(
+        return new static(
             date_modify(clone $arg->getEnd(), '+1 day'),
             clone $this->getEnd()
         );
@@ -409,7 +382,7 @@ class DateRange
      *
      * In other words, test that each of the date ranges 'abut' one another.
      *
-     * @param $args Other DateRanges to test
+     * @param  array $args Other DateRanges to test
      * @return bool
      */
     public static function isContiguous(array $args)
@@ -433,7 +406,7 @@ class DateRange
     /**
      * Return the start of a series of DateRanges
      *
-     * @param $args Other DateRanges to test
+     * @param  array $args Other DateRanges to test
      * @return DateTime
      */
     public static function getSeriesStart(array $args)
@@ -449,7 +422,7 @@ class DateRange
     /**
      * Return the end of a series of DateRanges
      *
-     * @param $args Other DateRanges to test
+     * @param  array $args Other DateRanges to test
      * @return DateTime
      */
     public static function getSeriesEnd(array $args)
@@ -468,10 +441,10 @@ class DateRange
      * Returns either -1, 0, or 1 if the current date range is less than, equal
      * to, or greater than the tested date range.
      *
-     * @param $arg Other DateRange to test
+     * @param  DateRange $arg Other DateRange to test
      * @return int
      */
-    public function compareTo(self $arg)
+    public function compareTo(DateRange $arg)
     {
         if ($this->equals($arg)) {
             return 0;

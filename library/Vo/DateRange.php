@@ -11,9 +11,9 @@
 
 namespace Vo;
 
-use DateTime,
-    InvalidArgumentException,
-    OutOfRangeException;
+use DateTime;
+use InvalidArgumentException;
+use OutOfRangeException;
 
 /**
  * Class to deal with and perform operations on ranges of dates.
@@ -68,7 +68,7 @@ class DateRange
      *
      * Currently, this only accepts dates of the form Y-m-d/Y-m-d.
      *
-     * @param  string $string ISO-8601 interval string
+     * @param  string    $string ISO-8601 interval string
      * @return DateRange
      */
     public static function fromIso8601($string)
@@ -106,9 +106,9 @@ class DateRange
      * $range2 = DateRange::fromData($object);
      * </pre>
      *
-     * @param  array|object   $object
-     * @param  string         $start  'Start' member or index name
-     * @param  string         $end    'End' member or index name
+     * @param  array|object $object
+     * @param  string       $start  'Start' member or index name
+     * @param  string       $end    'End' member or index name
      * @return DateRange
      */
     public static function fromData($object, $start = 'start', $end = 'end')
@@ -187,7 +187,7 @@ class DateRange
     /**
      * Create a date range with an unbounded past, but a bounded future
      *
-     * @param  DateTime $end Upper bound
+     * @param  DateTime  $end Upper bound
      * @return DateRange
      */
     public static function upTo(DateTime $end)
@@ -198,7 +198,7 @@ class DateRange
     /**
      * Create a date range with an bounded past, but an unbounded future
      *
-     * @param  DateTime $start Lower bound
+     * @param  DateTime  $start Lower bound
      * @return DateRange
      */
     public static function startingOn(DateTime $start)
@@ -348,7 +348,7 @@ class DateRange
      * begin prior to and end during the current date range, or begin during and
      * end after the current date range.
      *
-     * @param  DateRange $arg Other DateRange to test
+     * @param  DateRange           $arg Other DateRange to test
      * @return DateRange
      * @throws OutOfRangeException
      */
@@ -406,7 +406,7 @@ class DateRange
     /**
      * Return the start of a series of DateRanges
      *
-     * @param  array $args Other DateRanges to test
+     * @param  array    $args Other DateRanges to test
      * @return DateTime
      */
     public static function getSeriesStart(array $args)
@@ -422,7 +422,7 @@ class DateRange
     /**
      * Return the end of a series of DateRanges
      *
-     * @param  array $args Other DateRanges to test
+     * @param  array    $args Other DateRanges to test
      * @return DateTime
      */
     public static function getSeriesEnd(array $args)

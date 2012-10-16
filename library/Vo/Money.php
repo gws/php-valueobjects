@@ -11,9 +11,9 @@
 
 namespace Vo;
 
-use Locale,
-    NumberFormatter,
-    InvalidArgumentException;
+use Locale;
+use NumberFormatter;
+use InvalidArgumentException;
 
 /**
  * Money value object
@@ -70,7 +70,7 @@ class Money
     /**
      * Set the default formatter
      *
-     * @param  NumberFormatter $formatter
+     * @param NumberFormatter $formatter
      */
     public static function setDefaultFormatter(NumberFormatter $formatter)
     {
@@ -205,8 +205,8 @@ class Money
      * If you supply a non-Money value, it will be checked to verify that it
      * looks like a number, and automatically converted to a Money object.
      *
-     * @param  mixed                     $other
-     * @throws InvalidArgumentException  if an invalid value is supplied
+     * @param  mixed                    $other
+     * @throws InvalidArgumentException if an invalid value is supplied
      */
     public function add($other)
     {
@@ -219,8 +219,8 @@ class Money
      * If you supply a non-Money value, it will be checked to verify that it
      * looks like a number, and automatically converted to a Money object.
      *
-     * @param  mixed                     $other
-     * @throws InvalidArgumentException  if an invalid value is supplied
+     * @param  mixed                    $other
+     * @throws InvalidArgumentException if an invalid value is supplied
      */
     public function div($other)
     {
@@ -233,8 +233,8 @@ class Money
      * If you supply a non-Money value, it will be checked to verify that it
      * looks like a number, and automatically converted to a Money object.
      *
-     * @param  mixed                     $other
-     * @throws InvalidArgumentException  if an invalid value is supplied
+     * @param  mixed                    $other
+     * @throws InvalidArgumentException if an invalid value is supplied
      */
     public function mul($other)
     {
@@ -247,8 +247,8 @@ class Money
      * If you supply a non-Money value, it will be checked to verify that it
      * looks like a number, and automatically converted to a Money object.
      *
-     * @param  mixed                     $other
-     * @throws InvalidArgumentException  if an invalid value is supplied
+     * @param  mixed                    $other
+     * @throws InvalidArgumentException if an invalid value is supplied
      */
     public function sub($other)
     {
@@ -317,9 +317,9 @@ class Money
     /**
      * Asserts the validity of a given value and converts it to a Money object
      *
-     * @param  mixed                     $money
+     * @param  mixed                    $money
      * @return Money
-     * @throws InvalidArgumentException  if a value is not valid money
+     * @throws InvalidArgumentException if a value is not valid money
      */
     protected function assertAndConvertValidMoney($money)
     {

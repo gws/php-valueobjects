@@ -1,0 +1,16 @@
+{
+    "name": "gwis/php-valueobjects",
+    "description": "A collection of useful value objects for PHP",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Gordon Stratton",
+            "email": "gordon.stratton@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Vo": "library/"
+        }
+    }
+}

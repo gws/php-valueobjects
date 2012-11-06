@@ -37,31 +37,50 @@ class Ip
     protected $version;
 
     /**
-     * Accepts a string representation of an IP address and create an IP object
-     *
-     * @param string $raw Raw IP address
+     * @param  string $packed
+     * @return int
+     * @throws InvalidArgumentException when $packed is not a supported IP
+     *                                  version
      */
-    public function __construct($raw)
+    public static function getVersion($packed)
     {
-        $packed = @inet_pton($raw);
-
-        if ($packed === false) {
-            throw new InvalidArgumentException(
-                'Invalid IP address: inet_pton failed to understand it.'
-            );
-        }
-
-        $this->ip = $packed;
-
         $byteCount = mb_strlen($packed, '8bit');
 
-        if ($byteCount !== 4 && $byteCount !== 16) {
+        if (!in_array($byteCount, array(16, 4))) {
             throw new InvalidArgumentException(
-                'Invalid IP address: length in bytes must be 4 or 16.'
+                'Only IPv4 or IPv6 addresses are supported.'
             );
         }
 
-        $this->version = $byteCount === 4 ? 4 : 6;
+        return $byteCount === 16 ? 6 : 4;
+    }
+
+    /**
+     * @return string
+     * @throws InvalidArgumentException when $input is not recognized by
+     *                                  inet_pton()
+     */
+    public static function normalize($input)
+    {
+        $packed = @inet_pton($input);
+
+        if ($packed === false) {
+            throw new InvalidArgumentException('Invalid IP address.');
+        }
+
+        return $packed;
+    }
+
+    /**
+     * Accepts a string representation of an IP address and create an IP object
+     *
+     * @param  string $ip
+     * @throws InvalidArgumentException when $ip is invalid
+     */
+    public function __construct($ip)
+    {
+        $this->ip = self::normalize($ip);
+        $this->version = self::getVersion($this->ip);
     }
 
     /**

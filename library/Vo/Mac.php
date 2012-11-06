@@ -28,26 +28,33 @@ class Mac
     protected $mac;
 
     /**
+     * Convert input, if possible, into a lowercased hex string
+     *
+     * @param  string
+     * @return string
+     * @throws InvalidArgumentException when $input cannot be normalized
+     */
+    public static function normalize($input)
+    {
+        $nonHexRemoved = preg_replace('/[^[:xdigit:]]/', '', $input);
+
+        if (strlen($nonHexRemoved) !== 12) {
+            throw new InvalidArgumentException('Invalid MAC address.');
+        }
+
+        return strtolower($nonHexRemoved);
+    }
+
+    /**
      * Constructor
      *
      * Accepts an EUI-48 (MAC) address in any valid format.
      *
      * @param string $raw Raw MAC address
      */
-    public function __construct($raw)
+    public function __construct($eui48)
     {
-        // Remove all non-hex characters
-        $mac = preg_replace('/[^[:xdigit:]]/', '', $raw);
-
-        // Check if the remaining characters are the right length
-        if (strlen($mac) !== 12) {
-            throw new InvalidArgumentException('Invalid MAC address.');
-        }
-
-        // Lowercase the whole thing
-        $mac = strtolower($mac);
-
-        $this->mac = $mac;
+        $this->mac = self::normalize($eui48);
     }
 
     /**

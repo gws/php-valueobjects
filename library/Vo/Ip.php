@@ -37,25 +37,6 @@ class Ip
     protected $version;
 
     /**
-     * @param  string $packed
-     * @return int
-     * @throws InvalidArgumentException when $packed is not a supported IP
-     *                                  version
-     */
-    public static function getVersion($packed)
-    {
-        $byteCount = mb_strlen($packed, '8bit');
-
-        if (!in_array($byteCount, array(16, 4))) {
-            throw new InvalidArgumentException(
-                'Only IPv4 or IPv6 addresses are supported.'
-            );
-        }
-
-        return $byteCount === 16 ? 6 : 4;
-    }
-
-    /**
      * @return string
      * @throws InvalidArgumentException when $input is not recognized by
      *                                  inet_pton()
@@ -80,7 +61,16 @@ class Ip
     public function __construct($ip)
     {
         $this->ip = self::normalize($ip);
-        $this->version = self::getVersion($this->ip);
+
+        $byteCount = mb_strlen($this->ip, '8bit');
+
+        if (!in_array($byteCount, array(16, 4))) {
+            throw new InvalidArgumentException(
+                'Only IPv4 or IPv6 addresses are supported.'
+            );
+        }
+
+        $this->version = $byteCount === 16 ? 6 : 4;
     }
 
     /**

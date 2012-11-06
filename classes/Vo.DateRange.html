@@ -1,0 +1,472 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>PHP Value Objects » \Vo\DateRange</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">PHP Value Objects</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/ValueObjects.html"><i class="icon-folder-open"></i> ValueObjects</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">0</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Create a DateRange from a start date and an end date"><span class="description">Create a DateRange from a start date and an end date</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method___toString" title="__toString :: Convert the DateRange to an ISO-8601 interval string"><span class="description">Convert the DateRange to an ISO-8601 interval string</span><pre>__toString()</pre></a></li>
+<li class="method public "><a href="#method_abuts" title="abuts :: Test if the date ranges are next to each other and non-overlapping"><span class="description">Test if the date ranges are next to each other and non-overlapping</span><pre>abuts()</pre></a></li>
+<li class="method public "><a href="#method_compareTo" title="compareTo :: A comparison function for two DateRanges"><span class="description">A comparison function for two DateRanges</span><pre>compareTo()</pre></a></li>
+<li class="method public "><a href="#method_diff" title="diff :: Take the difference of two date ranges"><span class="description">Take the difference of two date ranges</span><pre>diff()</pre></a></li>
+<li class="method public "><a href="#method_equals" title="equals :: Test a DateRange for equality with the current DateRange"><span class="description">Test a DateRange for equality with the current DateRange</span><pre>equals()</pre></a></li>
+<li class="method public "><a href="#method_fromData" title="fromData :: Build a DateRange object from existing data"><span class="description">Build a DateRange object from existing data</span><pre>fromData()</pre></a></li>
+<li class="method public "><a href="#method_fromIso8601" title="fromIso8601 :: Build a DateRange object from an ISO-8601 interval string"><span class="description">Build a DateRange object from an ISO-8601 interval string</span><pre>fromIso8601()</pre></a></li>
+<li class="method public "><a href="#method_gap" title="gap :: Test whether this date range has a gap and if so, of how many days"><span class="description">Test whether this date range has a gap and if so, of how many days</span><pre>gap()</pre></a></li>
+<li class="method public "><a href="#method_getEnd" title="getEnd :: Accessor that returns the end date of this range"><span class="description">Accessor that returns the end date of this range</span><pre>getEnd()</pre></a></li>
+<li class="method public "><a href="#method_getSeriesEnd" title="getSeriesEnd :: Return the end of a series of DateRanges"><span class="description">Return the end of a series of DateRanges</span><pre>getSeriesEnd()</pre></a></li>
+<li class="method public "><a href="#method_getSeriesStart" title="getSeriesStart :: Return the start of a series of DateRanges"><span class="description">Return the start of a series of DateRanges</span><pre>getSeriesStart()</pre></a></li>
+<li class="method public "><a href="#method_getStart" title="getStart :: Accessor that returns the start date of this range"><span class="description">Accessor that returns the start date of this range</span><pre>getStart()</pre></a></li>
+<li class="method public "><a href="#method_includes" title="includes :: Test whether this DateRange includes a DateTime or a DateRange"><span class="description">Test whether this DateRange includes a DateTime or a DateRange</span><pre>includes()</pre></a></li>
+<li class="method public "><a href="#method_infinite" title="infinite :: Create the infinite date range"><span class="description">Create the infinite date range</span><pre>infinite()</pre></a></li>
+<li class="method public "><a href="#method_isContiguous" title="isContiguous :: Test if a series of DateRanges are contiguous"><span class="description">Test if a series of DateRanges are contiguous</span><pre>isContiguous()</pre></a></li>
+<li class="method public "><a href="#method_isEmpty" title="isEmpty :: Test whether this range represents an empty range"><span class="description">Test whether this range represents an empty range</span><pre>isEmpty()</pre></a></li>
+<li class="method public "><a href="#method_overlaps" title="overlaps :: Test whether this DateRange overlaps the current DateRange"><span class="description">Test whether this DateRange overlaps the current DateRange</span><pre>overlaps()</pre></a></li>
+<li class="method public "><a href="#method_startingOn" title="startingOn :: Create a date range with an bounded past, but an unbounded future"><span class="description">Create a date range with an bounded past, but an unbounded future</span><pre>startingOn()</pre></a></li>
+<li class="method public "><a href="#method_upTo" title="upTo :: Create a date range with an unbounded past, but a bounded future"><span class="description">Create a date range with an unbounded past, but a bounded future</span><pre>upTo()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_end" title="$end :: Internal 'end' DateTime"><span class="description">Internal 'end' DateTime</span><pre>$end</pre></a></li>
+<li class="property protected "><a href="#property_start" title="$start :: Internal 'start' DateTime"><span class="description">Internal 'start' DateTime</span><pre>$start</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_FUTURE" title="FUTURE :: Far-future ISO-8601 date"><span class="description">Far-future ISO-8601 date</span><pre>FUTURE</pre></a></li>
+<li class="constant  "><a href="#constant_PAST" title="PAST :: Far-past ISO-8601 date"><span class="description">Far-past ISO-8601 date</span><pre>PAST</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\Vo\DateRange"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Vo.html">Vo</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Vo.DateRange.html">DateRange</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Class to deal with and perform operations on ranges of dates.</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>link</th>
+<td><a href="http://www.martinfowler.com/eeaDev/Range.html">http://www.martinfowler.com/eeaDev/Range.html</a></td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/ValueObjects.html">ValueObjects</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Create a DateRange from a start date and an end date</h2>
+<pre>__construct(\DateTime $start, \DateTime $end) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$start</h4>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><p>Start date</p></div>
+<div class="subelement argument">
+<h4>$end</h4>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><p>End date</p></div>
+</div></div>
+</div>
+<a id="method___toString"></a><div class="element clickable method public method___toString" data-toggle="collapse" data-target=".method___toString .collapse">
+<h2>Convert the DateRange to an ISO-8601 interval string</h2>
+<pre>__toString() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>http://en.wikipedia.org/wiki/ISO_8601#Time_intervals</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_abuts"></a><div class="element clickable method public method_abuts" data-toggle="collapse" data-target=".method_abuts .collapse">
+<h2>Test if the date ranges are next to each other and non-overlapping</h2>
+<pre>abuts(\Vo\DateRange $arg) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$arg</h4>
+<code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code><p>Other DateRange to test</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_compareTo"></a><div class="element clickable method public method_compareTo" data-toggle="collapse" data-target=".method_compareTo .collapse">
+<h2>A comparison function for two DateRanges</h2>
+<pre>compareTo(\Vo\DateRange $arg) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Returns either -1, 0, or 1 if the current date range is less than, equal
+to, or greater than the tested date range.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$arg</h4>
+<code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code><p>Other DateRange to test</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_diff"></a><div class="element clickable method public method_diff" data-toggle="collapse" data-target=".method_diff .collapse">
+<h2>Take the difference of two date ranges</h2>
+<pre>diff(\Vo\DateRange $arg) : <a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>The difference of two date ranges in this case means that the overlap of
+the two ranges will be removed from the first range, and the result will
+be returned.</p>
+
+<p>This method will refuse to bisect the current date range (thus,
+confusingly, creating two date ranges), so the argument date range must
+begin prior to and end during the current date range, or begin during and
+end after the current date range.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$arg</h4>
+<code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code><p>Other DateRange to test</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.outofrangeexception.php">\OutOfRangeException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code></div>
+</div></div>
+</div>
+<a id="method_equals"></a><div class="element clickable method public method_equals" data-toggle="collapse" data-target=".method_equals .collapse">
+<h2>Test a DateRange for equality with the current DateRange</h2>
+<pre>equals(\Vo\DateRange $arg) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$arg</h4>
+<code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code><p>Other DateRange to test</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_fromData"></a><div class="element clickable method public method_fromData" data-toggle="collapse" data-target=".method_fromData .collapse">
+<h2>Build a DateRange object from existing data</h2>
+<pre>fromData(array | object $object, string $start, string $end) : <a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This accepts an array or object and assumes members 'start' and 'end'
+somewhere in the array or object. You can override these values with
+whatever you like.</p>
+
+<pre>
+// Example usage
+$array = array('start' => '2009-05-06', 'end' => new DateTime('2009-06-07'));
+
+$object = new stdClass();
+$object->start = '2009-05-06';
+$object->end = new DateTime('2009-06-07');
+
+$range1 = DateRange::fromData($array);
+$range2 = DateRange::fromData($object);
+</pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$object</h4>
+<code>array</code><code>object</code>
+</div>
+<div class="subelement argument">
+<h4>$start</h4>
+<code>string</code><p>'Start' member or index name</p>
+</div>
+<div class="subelement argument">
+<h4>$end</h4>
+<code>string</code><p>'End' member or index name</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code></div>
+</div></div>
+</div>
+<a id="method_fromIso8601"></a><div class="element clickable method public method_fromIso8601" data-toggle="collapse" data-target=".method_fromIso8601 .collapse">
+<h2>Build a DateRange object from an ISO-8601 interval string</h2>
+<pre>fromIso8601(string $string) : <a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Currently, this only accepts dates of the form Y-m-d/Y-m-d.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code><p>ISO-8601 interval string</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code></div>
+</div></div>
+</div>
+<a id="method_gap"></a><div class="element clickable method public method_gap" data-toggle="collapse" data-target=".method_gap .collapse">
+<h2>Test whether this date range has a gap and if so, of how many days</h2>
+<pre>gap(\Vo\DateRange $arg) : false | int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This function will return false if the date ranges overlap.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$arg</h4>
+<code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code><p>Other DateRange to test</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>false</code><code>int</code>
+</div>
+</div></div>
+</div>
+<a id="method_getEnd"></a><div class="element clickable method public method_getEnd" data-toggle="collapse" data-target=".method_getEnd .collapse">
+<h2>Accessor that returns the end date of this range</h2>
+<pre>getEnd() : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code></div>
+</div></div>
+</div>
+<a id="method_getSeriesEnd"></a><div class="element clickable method public method_getSeriesEnd" data-toggle="collapse" data-target=".method_getSeriesEnd .collapse">
+<h2>Return the end of a series of DateRanges</h2>
+<pre>getSeriesEnd(array $args) : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$args</h4>
+<code>array</code><p>Other DateRanges to test</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code></div>
+</div></div>
+</div>
+<a id="method_getSeriesStart"></a><div class="element clickable method public method_getSeriesStart" data-toggle="collapse" data-target=".method_getSeriesStart .collapse">
+<h2>Return the start of a series of DateRanges</h2>
+<pre>getSeriesStart(array $args) : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$args</h4>
+<code>array</code><p>Other DateRanges to test</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code></div>
+</div></div>
+</div>
+<a id="method_getStart"></a><div class="element clickable method public method_getStart" data-toggle="collapse" data-target=".method_getStart .collapse">
+<h2>Accessor that returns the start date of this range</h2>
+<pre>getStart() : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code></div>
+</div></div>
+</div>
+<a id="method_includes"></a><div class="element clickable method public method_includes" data-toggle="collapse" data-target=".method_includes .collapse">
+<h2>Test whether this DateRange includes a DateTime or a DateRange</h2>
+<pre>includes(<a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> | <a href="../classes/Vo.DateRange.html">\Vo\DateRange</a> $arg) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>If a DateTime is greater than or equal to the start of AND less than
+or equal to the end of this DateRange, it is considered included.</p>
+
+<p>If a DateRange is fully enclosed inside this DateRange, it is
+considered included. The test is essentially the same as for the
+DateTime except it is performed on both the start and end dates of the
+DateRange.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$arg</h4>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code><p>Other object to test</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_infinite"></a><div class="element clickable method public method_infinite" data-toggle="collapse" data-target=".method_infinite .collapse">
+<h2>Create the infinite date range</h2>
+<pre>infinite() : <a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Note: internally, a finite but unusual boundary is used.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code></div>
+</div></div>
+</div>
+<a id="method_isContiguous"></a><div class="element clickable method public method_isContiguous" data-toggle="collapse" data-target=".method_isContiguous .collapse">
+<h2>Test if a series of DateRanges are contiguous</h2>
+<pre>isContiguous(array $args) : bool</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>In other words, test that each of the date ranges 'abut' one another.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$args</h4>
+<code>array</code><p>Other DateRanges to test</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isEmpty"></a><div class="element clickable method public method_isEmpty" data-toggle="collapse" data-target=".method_isEmpty .collapse">
+<h2>Test whether this range represents an empty range</h2>
+<pre>isEmpty() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This is primarily used internally, but other methods may set the range
+to empty. This usually signals some kind of error where the return value
+is expected to be a DateRange and can be tested for emptiness.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_overlaps"></a><div class="element clickable method public method_overlaps" data-toggle="collapse" data-target=".method_overlaps .collapse">
+<h2>Test whether this DateRange overlaps the current DateRange</h2>
+<pre>overlaps(\Vo\DateRange $arg) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$arg</h4>
+<code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code><p>Other DateRange to test</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_startingOn"></a><div class="element clickable method public method_startingOn" data-toggle="collapse" data-target=".method_startingOn .collapse">
+<h2>Create a date range with an bounded past, but an unbounded future</h2>
+<pre>startingOn(\DateTime $start) : <a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$start</h4>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><p>Lower bound</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code></div>
+</div></div>
+</div>
+<a id="method_upTo"></a><div class="element clickable method public method_upTo" data-toggle="collapse" data-target=".method_upTo .collapse">
+<h2>Create a date range with an unbounded past, but a bounded future</h2>
+<pre>upTo(\DateTime $end) : <a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$end</h4>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><p>Upper bound</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Vo.DateRange.html">\Vo\DateRange</a></code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_end"> </a><div class="element clickable property protected property_end" data-toggle="collapse" data-target=".property_end .collapse">
+<h2>Internal 'end' DateTime</h2>
+<pre>$end : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_start"> </a><div class="element clickable property protected property_start" data-toggle="collapse" data-target=".property_start .collapse">
+<h2>Internal 'start' DateTime</h2>
+<pre>$start : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_FUTURE"> </a><div class="element clickable constant  constant_FUTURE" data-toggle="collapse" data-target=".constant_FUTURE .collapse">
+<h2>Far-future ISO-8601 date</h2>
+<pre>FUTURE : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_PAST"> </a><div class="element clickable constant  constant_PAST" data-toggle="collapse" data-target=".constant_PAST .collapse">
+<h2>Far-past ISO-8601 date</h2>
+<pre>PAST : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-11-06T04:16:51Z.<br></footer></div>
+</div>
+</body>
+</html>

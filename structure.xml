@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="2.0.0a10" title="PHP Value Objects">
+  <file path="Ip.php" hash="a2a67c664055b6b56a82af35f89b0107" package="ValueObjects">
+    <docblock line="2">
+      <description><![CDATA[PHP Value Objects]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="author" description="Gordon Stratton &lt;gordon.stratton@gmail.com&gt;"/>
+      <tag line="2" name="copyright" description="2011-2012 Gordon Stratton"/>
+      <tag line="2" name="license" description="http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause"/>
+      <tag line="2" name="link" description="https://github.com/strattg/php-valueobjects" link="https://github.com/strattg/php-valueobjects"/>
+      <tag line="2" name="package" description="ValueObjects"/>
+    </docblock>
+    <namespace-alias name="InvalidArgumentException">InvalidArgumentException</namespace-alias>
+    <class final="false" abstract="false" namespace="Vo" line="23" package="ValueObjects">
+      <extends/>
+      <name>Ip</name>
+      <full_name>\Vo\Ip</full_name>
+      <docblock line="16">
+        <description><![CDATA[Encapsulate an IP address]]></description>
+        <long-description><![CDATA[<p>This class supports both IPv4 and IPv6 addresses.</p>]]></long-description>
+        <tag line="16" name="package" description="ValueObjects"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="30" namespace="Vo" package="Default">
+        <name>$ip</name>
+        <default><![CDATA[]]></default>
+        <docblock line="25">
+          <description><![CDATA[IP address in packed in_addr representation]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="25" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="37" namespace="Vo" package="Default">
+        <name>$version</name>
+        <default><![CDATA[]]></default>
+        <docblock line="32">
+          <description><![CDATA[Version of the IP address]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="32" name="var" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="44" package="ValueObjects">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="39">
+          <description><![CDATA[Accepts a string representation of an IP address and create an IP object]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="39" name="param" description="Raw IP address" type="string" variable="$raw">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="44">
+          <name>$raw</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="78" package="ValueObjects">
+        <name>fromIntegerArray</name>
+        <full_name>fromIntegerArray</full_name>
+        <docblock line="67">
+          <description><![CDATA[Creates an IP object from an array of integers]]></description>
+          <long-description><![CDATA[<p>One likely use for this is to store an IP address in a database in an
+address-agnostic fashion.</p>
+
+<p>Note: The array of integers must be most-significant-integer first</p>]]></long-description>
+          <tag line="67" name="param" description="Integer array, most-significant first" type="array" variable="$integers">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="67" name="return" description="" type="\Vo\Ip">
+            <type by_reference="false">\Vo\Ip</type>
+          </tag>
+        </docblock>
+        <argument line="78">
+          <name>$integers</name>
+          <default><![CDATA[]]></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="102" package="ValueObjects">
+        <name>format</name>
+        <full_name>format</full_name>
+        <docblock line="97">
+          <description><![CDATA[Formats the IP address using {@link inet_ntop}]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="97" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="117" package="ValueObjects">
+        <name>toIntegerArray</name>
+        <full_name>toIntegerArray</full_name>
+        <docblock line="107">
+          <description><![CDATA[Marshals an IP object to an array of integers]]></description>
+          <long-description><![CDATA[<p>One likely use for this is to store an IP address in a database in an
+address-agnostic fashion.</p>
+
+<p>Note: The array of integers will be most-significant-integer first</p>]]></long-description>
+          <tag line="107" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="149" package="ValueObjects">
+        <name>isInNetwork</name>
+        <full_name>isInNetwork</full_name>
+        <docblock line="140">
+          <description><![CDATA[Tests if an IP address belongs to a specific network]]></description>
+          <long-description><![CDATA[<p>Accepts a network base address and a prefix length.</p>]]></long-description>
+          <tag line="140" name="param" description="Base address for the network to test" type="\Vo\Ip" variable="$base">
+            <type by_reference="false">\Vo\Ip</type>
+          </tag>
+          <tag line="140" name="param" description="Prefix length to test" type="int" variable="$prefixlen">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="140" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="149">
+          <name>$base</name>
+          <default><![CDATA[]]></default>
+          <type>\Vo\Ip</type>
+        </argument>
+        <argument line="149">
+          <name>$prefixlen</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="228" package="ValueObjects">
+        <name>getVersion</name>
+        <full_name>getVersion</full_name>
+        <docblock line="223">
+          <description><![CDATA[Returns the IP version of this object]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="223" name="return" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="238" package="ValueObjects">
+        <name>__toString</name>
+        <full_name>__toString</full_name>
+        <docblock line="233">
+          <description><![CDATA[Formats the IP object according to @see {format()}]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="233" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Mac.php" hash="77b1b510837cf4c015f5b4bc8239bdb6" package="ValueObjects">
+    <docblock line="2">
+      <description><![CDATA[PHP Value Objects]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="author" description="Gordon Stratton &lt;gordon.stratton@gmail.com&gt;"/>
+      <tag line="2" name="copyright" description="2011-2012 Gordon Stratton"/>
+      <tag line="2" name="license" description="http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause"/>
+      <tag line="2" name="link" description="https://github.com/strattg/php-valueobjects" link="https://github.com/strattg/php-valueobjects"/>
+      <tag line="2" name="package" description="ValueObjects"/>
+    </docblock>
+    <namespace-alias name="InvalidArgumentException">InvalidArgumentException</namespace-alias>
+    <class final="false" abstract="false" namespace="Vo" line="21" package="ValueObjects">
+      <extends/>
+      <name>Mac</name>
+      <full_name>\Vo\Mac</full_name>
+      <docblock line="16">
+        <description><![CDATA[Encapsulate a MAC address]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="16" name="package" description="ValueObjects"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="28" namespace="Vo" package="Default">
+        <name>$mac</name>
+        <default><![CDATA[]]></default>
+        <docblock line="23">
+          <description><![CDATA[Normalized MAC address (internal format)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="23" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="37" package="ValueObjects">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="30">
+          <description><![CDATA[Constructor]]></description>
+          <long-description><![CDATA[<p>Accepts an EUI-48 (MAC) address in any valid format.</p>]]></long-description>
+          <tag line="30" name="param" description="Raw MAC address" type="string" variable="$raw">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="37">
+          <name>$raw</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="61" package="ValueObjects">
+        <name>format</name>
+        <full_name>format</full_name>
+        <docblock line="53">
+          <description><![CDATA[Formats the MAC address in a configurable way]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="53" name="param" description="Whether or not to uppercase the formatted address" type="string" variable="$upper">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="53" name="param" description="The delimiter to use between groups" type="string" variable="$delimiter">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="53" name="param" description="The length of delimited hex digit groups (0 for none)" type="string" variable="$groupLength">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="53" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="61">
+          <name>$upper</name>
+          <default><![CDATA[false]]></default>
+          <type/>
+        </argument>
+        <argument line="61">
+          <name>$delimiter</name>
+          <default><![CDATA[':']]></default>
+          <type/>
+        </argument>
+        <argument line="61">
+          <name>$groupLength</name>
+          <default><![CDATA[2]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="83" package="ValueObjects">
+        <name>__toString</name>
+        <full_name>__toString</full_name>
+        <docblock line="76">
+          <description><![CDATA[Displays this MAC address]]></description>
+          <long-description><![CDATA[<p>The MAC address is displayed in a lowercased, non-delimited format.</p>]]></long-description>
+          <tag line="76" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="DateRange.php" hash="dac314f5f02bc49d86087c1a13c355ba" package="ValueObjects">
+    <docblock line="2">
+      <description><![CDATA[PHP Value Objects]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="author" description="Gordon Stratton &lt;gordon.stratton@gmail.com&gt;"/>
+      <tag line="2" name="copyright" description="2011-2012 Gordon Stratton"/>
+      <tag line="2" name="license" description="http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause"/>
+      <tag line="2" name="link" description="https://github.com/strattg/php-valueobjects" link="https://github.com/strattg/php-valueobjects"/>
+      <tag line="2" name="package" description="ValueObjects"/>
+    </docblock>
+    <namespace-alias name="DateTime">DateTime</namespace-alias>
+    <namespace-alias name="InvalidArgumentException">InvalidArgumentException</namespace-alias>
+    <namespace-alias name="OutOfRangeException">OutOfRangeException</namespace-alias>
+    <class final="false" abstract="false" namespace="Vo" line="24" package="ValueObjects">
+      <extends/>
+      <name>DateRange</name>
+      <full_name>\Vo\DateRange</full_name>
+      <docblock line="18">
+        <description><![CDATA[Class to deal with and perform operations on ranges of dates.]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="18" name="link" description="http://www.martinfowler.com/eeaDev/Range.html" link="http://www.martinfowler.com/eeaDev/Range.html"/>
+        <tag line="18" name="package" description="ValueObjects"/>
+      </docblock>
+      <constant namespace="Vo" line="31" package="ValueObjects">
+        <name>FUTURE</name>
+        <full_name>FUTURE</full_name>
+        <value><![CDATA['9999-01-01']]></value>
+        <docblock line="26">
+          <description><![CDATA[Far-future ISO-8601 date]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="26" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </constant>
+      <constant namespace="Vo" line="38" package="ValueObjects">
+        <name>PAST</name>
+        <full_name>PAST</full_name>
+        <value><![CDATA['1000-01-01']]></value>
+        <docblock line="33">
+          <description><![CDATA[Far-past ISO-8601 date]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="33" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </constant>
+      <property final="false" static="false" visibility="protected" line="45" namespace="Vo" package="Default">
+        <name>$start</name>
+        <default><![CDATA[]]></default>
+        <docblock line="40">
+          <description><![CDATA[Internal 'start' DateTime]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="40" name="var" description="" type="\DateTime">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="52" namespace="Vo" package="Default">
+        <name>$end</name>
+        <default><![CDATA[]]></default>
+        <docblock line="47">
+          <description><![CDATA[Internal 'end' DateTime]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="47" name="var" description="" type="\DateTime">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="60" package="ValueObjects">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="54">
+          <description><![CDATA[Create a DateRange from a start date and an end date]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="54" name="param" description="Start date" type="\DateTime" variable="$start">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+          <tag line="54" name="param" description="End date" type="\DateTime" variable="$end">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+        <argument line="60">
+          <name>$start</name>
+          <default><![CDATA[]]></default>
+          <type>\DateTime</type>
+        </argument>
+        <argument line="60">
+          <name>$end</name>
+          <default><![CDATA[]]></default>
+          <type>\DateTime</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="74" package="ValueObjects">
+        <name>fromIso8601</name>
+        <full_name>fromIso8601</full_name>
+        <docblock line="66">
+          <description><![CDATA[Build a DateRange object from an ISO-8601 interval string]]></description>
+          <long-description><![CDATA[<p>Currently, this only accepts dates of the form Y-m-d/Y-m-d.</p>]]></long-description>
+          <tag line="66" name="param" description="ISO-8601 interval string" type="string" variable="$string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="66" name="return" description="" type="\Vo\DateRange">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+        </docblock>
+        <argument line="74">
+          <name>$string</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="114" package="ValueObjects">
+        <name>fromData</name>
+        <full_name>fromData</full_name>
+        <docblock line="90">
+          <description><![CDATA[Build a DateRange object from existing data]]></description>
+          <long-description><![CDATA[<p>This accepts an array or object and assumes members 'start' and 'end'
+somewhere in the array or object. You can override these values with
+whatever you like.</p>
+
+<pre>
+// Example usage
+$array = array('start' => '2009-05-06', 'end' => new DateTime('2009-06-07'));
+
+$object = new stdClass();
+$object->start = '2009-05-06';
+$object->end = new DateTime('2009-06-07');
+
+$range1 = DateRange::fromData($array);
+$range2 = DateRange::fromData($object);
+</pre>]]></long-description>
+          <tag line="90" name="param" description="" type="array|object" variable="$object">
+            <type by_reference="false">array</type>
+            <type by_reference="false">object</type>
+          </tag>
+          <tag line="90" name="param" description="'Start' member or index name" type="string" variable="$start">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="90" name="param" description="'End' member or index name" type="string" variable="$end">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="90" name="return" description="" type="\Vo\DateRange">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+        </docblock>
+        <argument line="114">
+          <name>$object</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="114">
+          <name>$start</name>
+          <default><![CDATA['start']]></default>
+          <type/>
+        </argument>
+        <argument line="114">
+          <name>$end</name>
+          <default><![CDATA['end']]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="182" package="ValueObjects">
+        <name>infinite</name>
+        <full_name>infinite</full_name>
+        <docblock line="175">
+          <description><![CDATA[Create the infinite date range]]></description>
+          <long-description><![CDATA[<p>Note: internally, a finite but unusual boundary is used.</p>]]></long-description>
+          <tag line="175" name="return" description="" type="\Vo\DateRange">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="193" package="ValueObjects">
+        <name>upTo</name>
+        <full_name>upTo</full_name>
+        <docblock line="187">
+          <description><![CDATA[Create a date range with an unbounded past, but a bounded future]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="187" name="param" description="Upper bound" type="\DateTime" variable="$end">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+          <tag line="187" name="return" description="" type="\Vo\DateRange">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+        </docblock>
+        <argument line="193">
+          <name>$end</name>
+          <default><![CDATA[]]></default>
+          <type>\DateTime</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="204" package="ValueObjects">
+        <name>startingOn</name>
+        <full_name>startingOn</full_name>
+        <docblock line="198">
+          <description><![CDATA[Create a date range with an bounded past, but an unbounded future]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="198" name="param" description="Lower bound" type="\DateTime" variable="$start">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+          <tag line="198" name="return" description="" type="\Vo\DateRange">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+        </docblock>
+        <argument line="204">
+          <name>$start</name>
+          <default><![CDATA[]]></default>
+          <type>\DateTime</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="214" package="ValueObjects">
+        <name>getStart</name>
+        <full_name>getStart</full_name>
+        <docblock line="209">
+          <description><![CDATA[Accessor that returns the start date of this range]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="209" name="return" description="" type="\DateTime">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="224" package="ValueObjects">
+        <name>getEnd</name>
+        <full_name>getEnd</full_name>
+        <docblock line="219">
+          <description><![CDATA[Accessor that returns the end date of this range]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="219" name="return" description="" type="\DateTime">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="238" package="ValueObjects">
+        <name>isEmpty</name>
+        <full_name>isEmpty</full_name>
+        <docblock line="229">
+          <description><![CDATA[Test whether this range represents an empty range]]></description>
+          <long-description><![CDATA[<p>This is primarily used internally, but other methods may set the range
+to empty. This usually signals some kind of error where the return value
+is expected to be a DateRange and can be tested for emptiness.</p>]]></long-description>
+          <tag line="229" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="249" package="ValueObjects">
+        <name>equals</name>
+        <full_name>equals</full_name>
+        <docblock line="243">
+          <description><![CDATA[Test a DateRange for equality with the current DateRange]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="243" name="param" description="Other DateRange to test" type="\Vo\DateRange" variable="$arg">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+          <tag line="243" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="249">
+          <name>$arg</name>
+          <default><![CDATA[]]></default>
+          <type>\Vo\DateRange</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="269" package="ValueObjects">
+        <name>includes</name>
+        <full_name>includes</full_name>
+        <docblock line="255">
+          <description><![CDATA[Test whether this DateRange includes a DateTime or a DateRange]]></description>
+          <long-description><![CDATA[<p>If a DateTime is greater than or equal to the start of AND less than
+or equal to the end of this DateRange, it is considered included.</p>
+
+<p>If a DateRange is fully enclosed inside this DateRange, it is
+considered included. The test is essentially the same as for the
+DateTime except it is performed on both the start and end dates of the
+DateRange.</p>]]></long-description>
+          <tag line="255" name="param" description="Other object to test" type="\DateTime|\Vo\DateRange" variable="$arg">
+            <type by_reference="false">\DateTime</type>
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+          <tag line="255" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="269">
+          <name>$arg</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="290" package="ValueObjects">
+        <name>overlaps</name>
+        <full_name>overlaps</full_name>
+        <docblock line="284">
+          <description><![CDATA[Test whether this DateRange overlaps the current DateRange]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="284" name="param" description="Other DateRange to test" type="\Vo\DateRange" variable="$arg">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+          <tag line="284" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="290">
+          <name>$arg</name>
+          <default><![CDATA[]]></default>
+          <type>\Vo\DateRange</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="305" package="ValueObjects">
+        <name>gap</name>
+        <full_name>gap</full_name>
+        <docblock line="297">
+          <description><![CDATA[Test whether this date range has a gap and if so, of how many days]]></description>
+          <long-description><![CDATA[<p>This function will return false if the date ranges overlap.</p>]]></long-description>
+          <tag line="297" name="param" description="Other DateRange to test" type="\Vo\DateRange" variable="$arg">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+          <tag line="297" name="return" description="" type="false|int">
+            <type by_reference="false">false</type>
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="305">
+          <name>$arg</name>
+          <default><![CDATA[]]></default>
+          <type>\Vo\DateRange</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="333" package="ValueObjects">
+        <name>abuts</name>
+        <full_name>abuts</full_name>
+        <docblock line="327">
+          <description><![CDATA[Test if the date ranges are next to each other and non-overlapping]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="327" name="param" description="Other DateRange to test" type="\Vo\DateRange" variable="$arg">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+          <tag line="327" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="333">
+          <name>$arg</name>
+          <default><![CDATA[]]></default>
+          <type>\Vo\DateRange</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="355" package="ValueObjects">
+        <name>diff</name>
+        <full_name>diff</full_name>
+        <docblock line="339">
+          <description><![CDATA[Take the difference of two date ranges]]></description>
+          <long-description><![CDATA[<p>The difference of two date ranges in this case means that the overlap of
+the two ranges will be removed from the first range, and the result will
+be returned.</p>
+
+<p>This method will refuse to bisect the current date range (thus,
+confusingly, creating two date ranges), so the argument date range must
+begin prior to and end during the current date range, or begin during and
+end after the current date range.</p>]]></long-description>
+          <tag line="339" name="param" description="Other DateRange to test" type="\Vo\DateRange" variable="$arg">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+          <tag line="339" name="return" description="" type="\Vo\DateRange">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+          <tag line="339" name="throws" description="" type="\OutOfRangeException">
+            <type by_reference="false">\OutOfRangeException</type>
+          </tag>
+        </docblock>
+        <argument line="355">
+          <name>$arg</name>
+          <default><![CDATA[]]></default>
+          <type>\Vo\DateRange</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="388" package="ValueObjects">
+        <name>isContiguous</name>
+        <full_name>isContiguous</full_name>
+        <docblock line="380">
+          <description><![CDATA[Test if a series of DateRanges are contiguous]]></description>
+          <long-description><![CDATA[<p>In other words, test that each of the date ranges 'abut' one another.</p>]]></long-description>
+          <tag line="380" name="param" description="Other DateRanges to test" type="array" variable="$args">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="380" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="388">
+          <name>$args</name>
+          <default><![CDATA[]]></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="412" package="ValueObjects">
+        <name>getSeriesStart</name>
+        <full_name>getSeriesStart</full_name>
+        <docblock line="406">
+          <description><![CDATA[Return the start of a series of DateRanges]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="406" name="param" description="Other DateRanges to test" type="array" variable="$args">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="406" name="return" description="" type="\DateTime">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+        <argument line="412">
+          <name>$args</name>
+          <default><![CDATA[]]></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="428" package="ValueObjects">
+        <name>getSeriesEnd</name>
+        <full_name>getSeriesEnd</full_name>
+        <docblock line="422">
+          <description><![CDATA[Return the end of a series of DateRanges]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="422" name="param" description="Other DateRanges to test" type="array" variable="$args">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="422" name="return" description="" type="\DateTime">
+            <type by_reference="false">\DateTime</type>
+          </tag>
+        </docblock>
+        <argument line="428">
+          <name>$args</name>
+          <default><![CDATA[]]></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="447" package="ValueObjects">
+        <name>compareTo</name>
+        <full_name>compareTo</full_name>
+        <docblock line="438">
+          <description><![CDATA[A comparison function for two DateRanges]]></description>
+          <long-description><![CDATA[<p>Returns either -1, 0, or 1 if the current date range is less than, equal
+to, or greater than the tested date range.</p>]]></long-description>
+          <tag line="438" name="param" description="Other DateRange to test" type="\Vo\DateRange" variable="$arg">
+            <type by_reference="false">\Vo\DateRange</type>
+          </tag>
+          <tag line="438" name="return" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="447">
+          <name>$arg</name>
+          <default><![CDATA[]]></default>
+          <type>\Vo\DateRange</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="467" package="ValueObjects">
+        <name>__toString</name>
+        <full_name>__toString</full_name>
+        <docblock line="460">
+          <description><![CDATA[Convert the DateRange to an ISO-8601 interval string]]></description>
+          <long-description><![CDATA[<p>http://en.wikipedia.org/wiki/ISO_8601#Time_intervals</p>]]></long-description>
+          <tag line="460" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Money.php" hash="c8e96ad3dba9faddc69d24cfa6fde206" package="ValueObjects">
+    <docblock line="2">
+      <description><![CDATA[PHP Value Objects]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="author" description="Gordon Stratton &lt;gordon.stratton@gmail.com&gt;"/>
+      <tag line="2" name="copyright" description="2011-2012 Gordon Stratton"/>
+      <tag line="2" name="license" description="http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause"/>
+      <tag line="2" name="link" description="https://github.com/strattg/php-valueobjects" link="https://github.com/strattg/php-valueobjects"/>
+      <tag line="2" name="package" description="ValueObjects"/>
+    </docblock>
+    <namespace-alias name="Locale">Locale</namespace-alias>
+    <namespace-alias name="NumberFormatter">NumberFormatter</namespace-alias>
+    <namespace-alias name="InvalidArgumentException">InvalidArgumentException</namespace-alias>
+    <class final="false" abstract="false" namespace="Vo" line="24" package="ValueObjects">
+      <extends/>
+      <name>Money</name>
+      <full_name>\Vo\Money</full_name>
+      <docblock line="18">
+        <description><![CDATA[Money value object]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="18" name="see" description="\Vo\http://martinfowler.com/eaaCatalog/money.html" refers="\Vo\http://martinfowler.com/eaaCatalog/money.html"/>
+        <tag line="18" name="package" description="ValueObjects"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="31" namespace="Vo" package="Default">
+        <name>$amount</name>
+        <default><![CDATA[]]></default>
+        <docblock line="26">
+          <description><![CDATA[Internal amount]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="26" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="38" namespace="Vo" package="Default">
+        <name>$currency</name>
+        <default><![CDATA[]]></default>
+        <docblock line="33">
+          <description><![CDATA[Internal currency as a 3-digit ISO 4217 code]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="33" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="45" namespace="Vo" package="Default">
+        <name>$formatter</name>
+        <default><![CDATA[]]></default>
+        <docblock line="40">
+          <description><![CDATA[Currency formatter (requires the intl extension)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="40" name="var" description="" type="\NumberFormatter">
+            <type by_reference="false">\NumberFormatter</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="53" namespace="Vo" package="Default">
+        <name>$scale</name>
+        <default><![CDATA[]]></default>
+        <docblock line="47">
+          <description><![CDATA[Scale to use for calculations]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="47" name="var" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="47" name="link" description="http://www.php.net/manual/en/function.bcscale.php" link="http://www.php.net/manual/en/function.bcscale.php"/>
+        </docblock>
+      </property>
+      <property final="false" static="true" visibility="protected" line="60" namespace="Vo" package="Default">
+        <name>$defaultFormatter</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="55">
+          <description><![CDATA[Default currency formatter (requires the intl extension)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="55" name="var" description="" type="\NumberFormatter">
+            <type by_reference="false">\NumberFormatter</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="true" visibility="protected" line="68" namespace="Vo" package="Default">
+        <name>$defaultScale</name>
+        <default><![CDATA[20]]></default>
+        <docblock line="62">
+          <description><![CDATA[Default scale to use for calculations]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="62" name="var" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="62" name="see" description="\Vo\http://www.php.net/manual/en/function.bcscale.php" refers="\Vo\http://www.php.net/manual/en/function.bcscale.php"/>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="75" package="ValueObjects">
+        <name>setDefaultFormatter</name>
+        <full_name>setDefaultFormatter</full_name>
+        <docblock line="70">
+          <description><![CDATA[Set the default formatter]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="70" name="param" description="" type="\NumberFormatter" variable="$formatter">
+            <type by_reference="false">\NumberFormatter</type>
+          </tag>
+        </docblock>
+        <argument line="75">
+          <name>$formatter</name>
+          <default><![CDATA[]]></default>
+          <type>\NumberFormatter</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="85" package="ValueObjects">
+        <name>setDefaultScale</name>
+        <full_name>setDefaultScale</full_name>
+        <docblock line="80">
+          <description><![CDATA[Set the default scale to use for calculations]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="80" name="param" description="" type="int" variable="$scale">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="85">
+          <name>$scale</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="98" package="ValueObjects">
+        <name>getDefaultFormatter</name>
+        <full_name>getDefaultFormatter</full_name>
+        <docblock line="90">
+          <description><![CDATA[Get the default formatter]]></description>
+          <long-description><![CDATA[<p>This will create a formatter based on the Locale default if one is not
+set prior to this method being called.</p>]]></long-description>
+          <tag line="90" name="return" description="" type="\NumberFormatter">
+            <type by_reference="false">\NumberFormatter</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Vo" line="117" package="ValueObjects">
+        <name>getDefaultScale</name>
+        <full_name>getDefaultScale</full_name>
+        <docblock line="112">
+          <description><![CDATA[Get the default scale to use for calculations]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="112" name="return" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="128" package="ValueObjects">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="122">
+          <description><![CDATA[Constructor]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="122" name="param" description="" type="string" variable="$amount">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="122" name="param" description="ISO-4217 code" type="string" variable="$currency">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="128">
+          <name>$amount</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="128">
+          <name>$currency</name>
+          <default><![CDATA['USD']]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="141" package="ValueObjects">
+        <name>getAmount</name>
+        <full_name>getAmount</full_name>
+        <docblock line="136">
+          <description><![CDATA[Get the internal amount]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="136" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="151" package="ValueObjects">
+        <name>getCurrency</name>
+        <full_name>getCurrency</full_name>
+        <docblock line="146">
+          <description><![CDATA[Get the internal currency as an ISO-4217 code]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="146" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="161" package="ValueObjects">
+        <name>getFormatter</name>
+        <full_name>getFormatter</full_name>
+        <docblock line="156">
+          <description><![CDATA[Get the internal number formatter]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="156" name="return" description="" type="\NumberFormatter">
+            <type by_reference="false">\NumberFormatter</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="171" package="ValueObjects">
+        <name>getScale</name>
+        <full_name>getScale</full_name>
+        <docblock line="166">
+          <description><![CDATA[Get the scale used in calculations for this object]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="166" name="return" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="182" package="ValueObjects">
+        <name>setFormatter</name>
+        <full_name>setFormatter</full_name>
+        <docblock line="176">
+          <description><![CDATA[Set the internal number formatter]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="176" name="param" description="" type="\NumberFormatter" variable="$formatter">
+            <type by_reference="false">\NumberFormatter</type>
+          </tag>
+          <tag line="176" name="return" description="" type="\Vo\Money">
+            <type by_reference="false">\Vo\Money</type>
+          </tag>
+        </docblock>
+        <argument line="182">
+          <name>$formatter</name>
+          <default><![CDATA[]]></default>
+          <type>\NumberFormatter</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="195" package="ValueObjects">
+        <name>setScale</name>
+        <full_name>setScale</full_name>
+        <docblock line="189">
+          <description><![CDATA[Set the scale used in calculations for this object]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="189" name="param" description="" type="int" variable="$value">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="189" name="return" description="" type="\Vo\Money">
+            <type by_reference="false">\Vo\Money</type>
+          </tag>
+        </docblock>
+        <argument line="195">
+          <name>$value</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="211" package="ValueObjects">
+        <name>add</name>
+        <full_name>add</full_name>
+        <docblock line="202">
+          <description><![CDATA[Add a number or Money to this object and return a new Money result]]></description>
+          <long-description><![CDATA[<p>If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.</p>]]></long-description>
+          <tag line="202" name="param" description="" type="mixed" variable="$other">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="202" name="throws" description="if an invalid value is supplied" type="\InvalidArgumentException">
+            <type by_reference="false">\InvalidArgumentException</type>
+          </tag>
+        </docblock>
+        <argument line="211">
+          <name>$other</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="225" package="ValueObjects">
+        <name>div</name>
+        <full_name>div</full_name>
+        <docblock line="216">
+          <description><![CDATA[Divide a number or Money into this object and return a new Money result]]></description>
+          <long-description><![CDATA[<p>If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.</p>]]></long-description>
+          <tag line="216" name="param" description="" type="mixed" variable="$other">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="216" name="throws" description="if an invalid value is supplied" type="\InvalidArgumentException">
+            <type by_reference="false">\InvalidArgumentException</type>
+          </tag>
+        </docblock>
+        <argument line="225">
+          <name>$other</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="239" package="ValueObjects">
+        <name>mul</name>
+        <full_name>mul</full_name>
+        <docblock line="230">
+          <description><![CDATA[Multiply a number or Money by this object and return a new Money result]]></description>
+          <long-description><![CDATA[<p>If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.</p>]]></long-description>
+          <tag line="230" name="param" description="" type="mixed" variable="$other">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="230" name="throws" description="if an invalid value is supplied" type="\InvalidArgumentException">
+            <type by_reference="false">\InvalidArgumentException</type>
+          </tag>
+        </docblock>
+        <argument line="239">
+          <name>$other</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="253" package="ValueObjects">
+        <name>sub</name>
+        <full_name>sub</full_name>
+        <docblock line="244">
+          <description><![CDATA[Subtract a number or Money from this object and return a new Money result]]></description>
+          <long-description><![CDATA[<p>If you supply a non-Money value, it will be checked to verify that it
+looks like a number, and automatically converted to a Money object.</p>]]></long-description>
+          <tag line="244" name="param" description="" type="mixed" variable="$other">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="244" name="throws" description="if an invalid value is supplied" type="\InvalidArgumentException">
+            <type by_reference="false">\InvalidArgumentException</type>
+          </tag>
+        </docblock>
+        <argument line="253">
+          <name>$other</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="267" package="ValueObjects">
+        <name>round</name>
+        <full_name>round</full_name>
+        <docblock line="258">
+          <description><![CDATA[Round the internal amount at the specified precision]]></description>
+          <long-description><![CDATA[<p>Note that the value returned is a string. This is a function of the BC
+library and allows large numbers to be represented.</p>]]></long-description>
+          <tag line="258" name="param" description="" type="int" variable="$precision">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="258" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="267">
+          <name>$precision</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="299" package="ValueObjects">
+        <name>format</name>
+        <full_name>format</full_name>
+        <docblock line="291">
+          <description><![CDATA[Format the number and currency according to the current formatter]]></description>
+          <long-description><![CDATA[<p>For example, if the currency is USD and the value is 42.123, this will
+output "$42.12".</p>]]></long-description>
+          <tag line="291" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Vo" line="312" package="ValueObjects">
+        <name>__toString</name>
+        <full_name>__toString</full_name>
+        <docblock line="307">
+          <description><![CDATA[Format the Money object according to {@see format()}]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="307" name="see" description="\Vo\format()" refers="\Vo\format()"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Vo" line="324" package="ValueObjects">
+        <name>assertAndConvertValidMoney</name>
+        <full_name>assertAndConvertValidMoney</full_name>
+        <docblock line="317">
+          <description><![CDATA[Asserts the validity of a given value and converts it to a Money object]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="317" name="param" description="" type="mixed" variable="$money">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="317" name="return" description="" type="\Vo\Money">
+            <type by_reference="false">\Vo\Money</type>
+          </tag>
+          <tag line="317" name="throws" description="if a value is not valid money" type="\InvalidArgumentException">
+            <type by_reference="false">\InvalidArgumentException</type>
+          </tag>
+        </docblock>
+        <argument line="324">
+          <name>$money</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Vo" line="356" package="ValueObjects">
+        <name>operation</name>
+        <full_name>operation</full_name>
+        <docblock line="349">
+          <description><![CDATA[Generic function to perform a BC math operation]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="349" name="param" description="a valid BC math function" type="string" variable="$func">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="349" name="param" description="second value to use in the operation" type="mixed" variable="$other">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="349" name="return" description="" type="\Vo\Money">
+            <type by_reference="false">\Vo\Money</type>
+          </tag>
+        </docblock>
+        <argument line="356">
+          <name>$func</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="356">
+          <name>$other</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <package name="ValueObjects" full_name="ValueObjects"/>
+  <namespace name="Vo" full_name="Vo"/>
+  <marker count="0">todo</marker>
+  <marker count="0">fixme</marker>
+  <deprecated count="0"/>
+</project>

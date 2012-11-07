@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+$vendorPhpUnitPath = __DIR__ . '/../vendor/bin/phpunit';
+
+if (is_readable($vendorPhpUnitPath)) {
+    $phpunit = $vendorPhpUnitPath;
+} else {
+    $phpunit = 'phpunit';
+}
+
+system("{$phpunit} " . implode(' ', array_slice($argv, 1)), $result);
+
+exit($result);

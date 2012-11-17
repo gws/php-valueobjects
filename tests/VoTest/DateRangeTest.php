@@ -2,11 +2,10 @@
 
 namespace VoTest;
 
-use DateTime,
-    PHPUnit_Framework_TestCase as TestCase,
-    Vo\DateRange;
+use DateTime;
+use Vo\DateRange;
 
-class DateRangeTest extends TestCase
+class DateRangeTest extends \PHPUnit_Framework_TestCase
 {
     public function testFromIso8601()
     {

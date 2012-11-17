@@ -2,11 +2,10 @@
 
 namespace VoTest;
 
-use InvalidArgumentException,
-    PHPUnit_Framework_TestCase as TestCase,
-    Vo\Ip;
+use InvalidArgumentException;
+use Vo\Ip;
 
-class IpTest extends TestCase
+class IpTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider rawIpProvider
@@ -16,8 +15,9 @@ class IpTest extends TestCase
         try {
             $mac = new Ip($raw);
         } catch (InvalidArgumentException $e) {
-            if (!$is_valid)
+            if (!$is_valid) {
                 return;
+            }
 
             throw $e;
         }

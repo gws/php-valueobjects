@@ -2,11 +2,10 @@
 
 namespace VoTest;
 
-use InvalidArgumentException,
-    PHPUnit_Framework_TestCase as TestCase,
-    Vo\Mac;
+use InvalidArgumentException;
+use Vo\Mac;
 
-class MacTest extends TestCase
+class MacTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider rawMacProvider
@@ -16,8 +15,9 @@ class MacTest extends TestCase
         try {
             $mac = new Mac($raw);
         } catch (InvalidArgumentException $e) {
-            if (!$is_valid)
+            if (!$is_valid) {
                 return;
+            }
 
             throw $e;
         }

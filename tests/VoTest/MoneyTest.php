@@ -2,11 +2,10 @@
 
 namespace VoTest;
 
-use NumberFormatter,
-    PHPUnit_Framework_TestCase as TestCase,
-    Vo\Money;
+use NumberFormatter;
+use Vo\Money;
 
-class MoneyTest extends TestCase
+class MoneyTest extends \PHPUnit_Framework_TestCase
 {
     public function testAddTwoSmallNumbers()
     {
@@ -211,10 +210,12 @@ class MoneyTest extends TestCase
     public function testFormatPositiveUSDInEnUs()
     {
         $m = new Money(1077.701, 'USD');
-        $m->setFormatter(new NumberFormatter(
-            'en-US',
-            NumberFormatter::CURRENCY
-        ));
+        $m->setFormatter(
+            new NumberFormatter(
+                'en-US',
+                NumberFormatter::CURRENCY
+            )
+        );
 
         $this->assertSame(
             '$1,077.70',
@@ -225,10 +226,12 @@ class MoneyTest extends TestCase
     public function testNegativeFormatUSDInEnUs()
     {
         $m = new Money('-1077.701', 'USD');
-        $m->setFormatter(new NumberFormatter(
-            'en-US',
-            NumberFormatter::CURRENCY
-        ));
+        $m->setFormatter(
+            new NumberFormatter(
+                'en-US',
+                NumberFormatter::CURRENCY
+            )
+        );
 
         $this->assertSame(
             '($1,077.70)',
@@ -239,10 +242,12 @@ class MoneyTest extends TestCase
     public function testPositiveFormatEURInEnUs()
     {
         $m = new Money(1077.701, 'EUR');
-        $m->setFormatter(new NumberFormatter(
-            'en-US',
-            NumberFormatter::CURRENCY
-        ));
+        $m->setFormatter(
+            new NumberFormatter(
+                'en-US',
+                NumberFormatter::CURRENCY
+            )
+        );
 
         $this->assertSame(
             '€1,077.70',
@@ -253,10 +258,12 @@ class MoneyTest extends TestCase
     public function testNegativeFormatEURInEnUs()
     {
         $m = new Money('-1077.701', 'EUR');
-        $m->setFormatter(new NumberFormatter(
-            'en-US',
-            NumberFormatter::CURRENCY
-        ));
+        $m->setFormatter(
+            new NumberFormatter(
+                'en-US',
+                NumberFormatter::CURRENCY
+            )
+        );
 
         $this->assertSame(
             '(€1,077.70)',
@@ -267,10 +274,12 @@ class MoneyTest extends TestCase
     public function testPositiveFormatEURInDeDe()
     {
         $m = new Money(1077.701, 'EUR');
-        $m->setFormatter(new NumberFormatter(
-            'de-DE',
-            NumberFormatter::CURRENCY
-        ));
+        $m->setFormatter(
+            new NumberFormatter(
+                'de-DE',
+                NumberFormatter::CURRENCY
+            )
+        );
 
         $this->assertSame(
             '1.077,70 €',

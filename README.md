@@ -1,7 +1,7 @@
 PHP Value Objects
 =================
 
-master [![master branch build status](https://secure.travis-ci.org/gwis/php-valueobjects.png?branch=master)](http://travis-ci.org/gwis/php-valueobjects)
+master [![master branch build status](https://api.travis-ci.org/gws/php-valueobjects.png?branch=master)](http://travis-ci.org/gws/php-valueobjects)
 
 [Wikipedia](https://en.wikipedia.org/wiki/Value_object) has a pretty good
 general explanation of value objects.
@@ -12,4 +12,4 @@ on how to use these classes.
 Documentation
 -------------
 
-http://gwis.github.com/php-valueobjects
+http://gws.github.com/php-valueobjects

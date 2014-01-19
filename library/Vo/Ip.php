@@ -3,10 +3,9 @@
  * PHP Value Objects
  *
  * @author    Gordon Stratton <gordon.stratton@gmail.com>
- * @copyright 2011-2012 Gordon Stratton
+ * @copyright 2011-2014 Gordon Stratton
  * @license   http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause
- * @link      https://github.com/strattg/php-valueobjects
- * @package   ValueObjects
+ * @link      https://github.com/gws/php-valueobjects
  */
 
 namespace Vo;
@@ -17,8 +16,6 @@ use InvalidArgumentException;
  * Encapsulate an IP address
  *
  * This class supports both IPv4 and IPv6 addresses.
- *
- * @package ValueObjects
  */
 class Ip
 {
@@ -37,9 +34,20 @@ class Ip
     protected $version;
 
     /**
+     * Converts an IP address into its packed binary representation
+     *
+     * Works for both IPv4 and IPv6 addresses.
+     *
+     * Example input:
+     *
+     * <ul>
+     *   <li>127.0.0.1</li>
+     *   <li>::1</li>
+     * </ul>
+     *
+     * @param  string $input Formatted IP address to normalize
      * @return string
-     * @throws InvalidArgumentException when $input is not recognized by
-     *                                  inet_pton()
+     * @throws InvalidArgumentException on invalid IP addresses
      */
     public static function normalize($input)
     {

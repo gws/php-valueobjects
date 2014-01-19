@@ -3,10 +3,9 @@
  * PHP Value Objects
  *
  * @author    Gordon Stratton <gordon.stratton@gmail.com>
- * @copyright 2011-2012 Gordon Stratton
+ * @copyright 2011-2014 Gordon Stratton
  * @license   http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause
- * @link      https://github.com/strattg/php-valueobjects
- * @package   ValueObjects
+ * @link      https://github.com/gws/php-valueobjects
  */
 
 namespace Vo;
@@ -18,8 +17,7 @@ use InvalidArgumentException;
 /**
  * Money value object
  *
- * @see     http://martinfowler.com/eaaCatalog/money.html
- * @package ValueObjects
+ * @see http://martinfowler.com/eaaCatalog/money.html
  */
 class Money
 {

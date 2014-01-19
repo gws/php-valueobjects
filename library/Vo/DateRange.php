@@ -3,10 +3,9 @@
  * PHP Value Objects
  *
  * @author    Gordon Stratton <gordon.stratton@gmail.com>
- * @copyright 2011-2012 Gordon Stratton
+ * @copyright 2011-2014 Gordon Stratton
  * @license   http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause
- * @link      https://github.com/strattg/php-valueobjects
- * @package   ValueObjects
+ * @link      https://github.com/gws/php-valueobjects
  */
 
 namespace Vo;
@@ -18,8 +17,7 @@ use OutOfRangeException;
 /**
  * Class to deal with and perform operations on ranges of dates.
  *
- * @link    http://www.martinfowler.com/eeaDev/Range.html
- * @package ValueObjects
+ * @link http://www.martinfowler.com/eeaDev/Range.html
  */
 class DateRange
 {

@@ -3,10 +3,9 @@
  * PHP Value Objects
  *
  * @author    Gordon Stratton <gordon.stratton@gmail.com>
- * @copyright 2011-2012 Gordon Stratton
+ * @copyright 2011-2014 Gordon Stratton
  * @license   http://opensource.org/licenses/BSD-2-Clause BSD 2-Clause
- * @link      https://github.com/strattg/php-valueobjects
- * @package   ValueObjects
+ * @link      https://github.com/gws/php-valueobjects
  */
 
 namespace Vo;
@@ -15,8 +14,6 @@ use InvalidArgumentException;
 
 /**
  * Encapsulate a MAC address
- *
- * @package ValueObjects
  */
 class Mac
 {
@@ -28,11 +25,11 @@ class Mac
     protected $mac;
 
     /**
-     * Convert input, if possible, into a lowercased hex string
+     * Normalizes formatted MAC address into a lowercased hex string
      *
-     * @param  string
+     * @param  string $input
      * @return string
-     * @throws InvalidArgumentException when $input cannot be normalized
+     * @throws InvalidArgumentException on invalid MAC addresses
      */
     public static function normalize($input)
     {
@@ -50,7 +47,7 @@ class Mac
      *
      * Accepts an EUI-48 (MAC) address in any valid format.
      *
-     * @param string $raw Raw MAC address
+     * @param string $eui48
      */
     public function __construct($eui48)
     {

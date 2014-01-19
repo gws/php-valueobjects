@@ -223,22 +223,6 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testNegativeFormatUSDInEnUs()
-    {
-        $m = new Money('-1077.701', 'USD');
-        $m->setFormatter(
-            new NumberFormatter(
-                'en-US',
-                NumberFormatter::CURRENCY
-            )
-        );
-
-        $this->assertSame(
-            '($1,077.70)',
-            $m->format()
-        );
-    }
-
     public function testPositiveFormatEURInEnUs()
     {
         $m = new Money(1077.701, 'EUR');
@@ -251,38 +235,6 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             '€1,077.70',
-            $m->format()
-        );
-    }
-
-    public function testNegativeFormatEURInEnUs()
-    {
-        $m = new Money('-1077.701', 'EUR');
-        $m->setFormatter(
-            new NumberFormatter(
-                'en-US',
-                NumberFormatter::CURRENCY
-            )
-        );
-
-        $this->assertSame(
-            '(€1,077.70)',
-            $m->format()
-        );
-    }
-
-    public function testPositiveFormatEURInDeDe()
-    {
-        $m = new Money(1077.701, 'EUR');
-        $m->setFormatter(
-            new NumberFormatter(
-                'de-DE',
-                NumberFormatter::CURRENCY
-            )
-        );
-
-        $this->assertSame(
-            '1.077,70 €',
             $m->format()
         );
     }

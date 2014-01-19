@@ -6,10 +6,9 @@ php:
   - "5.4"
 
 before_script:
-  - composer require squizlabs/php_codesniffer:~1.4
-  - composer install
+  - composer install --dev
 
 script:
-  - ./tests/run-tests -c ./tests/phpunit.xml.dist
+  - ./vendor/bin/phpunit -c ./tests/phpunit.xml.dist
   - ./vendor/bin/phpcs --standard=PSR2 library
   - ./vendor/bin/phpcs --standard=PSR2 tests/VoTest

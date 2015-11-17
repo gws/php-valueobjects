@@ -1,5 +1,5 @@
 {
-    "name": "gwis/php-valueobjects",
+    "name": "gws/php-valueobjects",
     "description": "A collection of useful value objects for PHP",
     "license": "BSD-2-Clause",
     "authors": [

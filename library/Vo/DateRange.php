@@ -26,7 +26,7 @@ class DateRange
      *
      * @var string
      */
-    const FUTURE = '9999-01-01';
+    const FUTURE = '9999-12-31';
 
     /**
      * Far-past ISO-8601 date

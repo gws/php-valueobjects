@@ -90,8 +90,8 @@ class DateTimeRange extends DateRange
         return implode(
             '/',
             array(
-                $this->getStart()->format('Y-m-d\TH:i:s\Z'),
-                $this->getEnd()->format('Y-m-d\TH:i:s\Z')
+                $this->getStart()->format('c'),
+                $this->getEnd()->format('c')
             )
         );
     }

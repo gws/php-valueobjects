@@ -379,7 +379,7 @@ class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            '2006-09-06T06:09:06Z/2006-09-15T06:09:15Z',
+            '2006-09-06T06:09:06+00:00/2006-09-15T06:09:15+00:00',
             $dr1->__toString()
         );
     }

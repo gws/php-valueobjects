@@ -3,6 +3,7 @@
 namespace VoTest;
 
 use DateTime;
+use Vo\DateRange;
 use Vo\DateTimeRange;
 
 class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
@@ -382,5 +383,21 @@ class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
             '2006-09-06T06:09:06+00:00/2006-09-15T06:09:15+00:00',
             $dr1->__toString()
         );
+    }
+
+    public function testDiffWithDateRange()
+    {
+        $dr1 = new DateTimeRange(
+            new DateTime('2006-07-01T06:07:01Z'),
+            new DateTime('2006-08-01T06:08:01Z')
+        );
+
+        $dr2 = new DateRange(
+            new DateTime('2006-07-15'),
+            new DateTime('2006-08-15')
+        );
+
+        $this->assertEquals('2006-07-01T06:07:01+00:00/2006-07-14T23:59:59+01:00', $dr1->diff($dr2)->__toString());
+        $this->assertEquals('2006-08-02/2006-08-15', $dr2->diff($dr1)->__toString());
     }
 }

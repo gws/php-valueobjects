@@ -34,19 +34,20 @@ class DateTimeRange extends DateRange
     const PAST = '1000-01-01 00:00:00';
 
     /**
-     * Take the difference of two date ranges
+     * Take the difference of two datetime ranges
      *
-     * The difference of two date ranges in this case means that the overlap of
+     * The difference of two datetime ranges in this case means that the overlap of
      * the two ranges will be removed from the first range, and the result will
      * be returned.
      *
-     * This method will refuse to bisect the current date range (thus,
-     * confusingly, creating two date ranges), so the argument date range must
-     * begin prior to and end during the current date range, or begin during and
-     * end after the current date range.
+     * This method will refuse to bisect the current datetime range (thus,
+     * confusingly, creating two datetime ranges), so the argument datetime range must
+     * begin prior to and end during the current datetime range, or begin during and
+     * end after the current datetime range.
      *
-     * @param  DateRange           $arg Other DateRange to test
-     * @return DateRange
+     * @param DateRange|DateTimeRange $arg Other DateRange or DateTimeRange to test
+     *
+     * @return DateTimeRange
      * @throws OutOfRangeException
      */
     public function diff(DateRange $arg)

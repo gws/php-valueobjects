@@ -3,6 +3,7 @@
 namespace VoTest;
 
 use DateTime;
+use DateTimeZone;
 use Vo\DateRange;
 use Vo\DateTimeRange;
 
@@ -393,8 +394,8 @@ class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
         );
 
         $dr2 = new DateRange(
-            new DateTime('2006-07-15'),
-            new DateTime('2006-08-15')
+            new DateTime('2006-07-15', new DateTimeZone('Europe/London')),
+            new DateTime('2006-08-15', new DateTimeZone('Europe/London'))
         );
 
         $this->assertEquals('2006-07-01T06:07:01+00:00/2006-07-14T23:59:59+01:00', $dr1->diff($dr2)->__toString());

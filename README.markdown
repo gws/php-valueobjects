@@ -8,6 +8,7 @@
 general explanation of value objects.
 
 - `Vo\DateRange` for date ranges
+- `Vo\DateTimeRange` for date and time ranges
 - `Vo\Ip` for IPv4 and IPv6 addresses
 - `Vo\Mac` for MAC addresses
 - `Vo\Money` for financial math and formatting using the `intl` extension

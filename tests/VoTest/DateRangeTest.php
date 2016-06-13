@@ -356,4 +356,43 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
             $dr1->__toString()
         );
     }
+
+    public function testIsFutureIsPastIsInfinite()
+    {
+        $dr1 = new DateRange(
+            new DateTime('2006-09-06'),
+            new DateTime('2006-09-15')
+        );
+
+        $dr2 = new DateRange(
+            new DateTime(DateRange::PAST),
+            new DateTime('2006-09-15')
+        );
+
+        $dr3 = new DateRange(
+            new DateTime('2006-09-06'),
+            new DateTime(DateRange::FUTURE)
+        );
+
+        $dr4 = new DateRange(
+            new DateTime(DateRange::PAST),
+            new DateTime(DateRange::FUTURE)
+        );
+
+        $this->assertFalse($dr1->isPast(), $dr1->__toString());
+        $this->assertFalse($dr1->isFuture(), $dr1->__toString());
+        $this->assertFalse($dr1->isInfinite(), $dr1->__toString());
+
+        $this->assertTrue($dr2->isPast(), $dr2->__toString());
+        $this->assertFalse($dr2->isFuture(), $dr2->__toString());
+        $this->assertFalse($dr2->isInfinite(), $dr2->__toString());
+
+        $this->assertFalse($dr3->isPast(), $dr3->__toString());
+        $this->assertTrue($dr3->isFuture(), $dr3->__toString());
+        $this->assertFalse($dr3->isInfinite(), $dr3->__toString());
+
+        $this->assertTrue($dr4->isPast(), $dr4->__toString());
+        $this->assertTrue($dr4->isFuture(), $dr4->__toString());
+        $this->assertTrue($dr4->isInfinite(), $dr4->__toString());
+    }
 }

@@ -476,4 +476,34 @@ class DateRange
             )
         );
     }
+
+    /**
+     * Determine if the range is anchored in the future.
+     *
+     * @return bool
+     */
+    public function isFuture()
+    {
+        return new DateTime(static::FUTURE) == $this->getEnd();
+    }
+
+    /**
+     * Determine if the range is anchored in the past.
+     *
+     * @return bool
+     */
+    public function isPast()
+    {
+        return new DateTime(static::PAST) == $this->getStart();
+    }
+
+    /**
+     * Determine if the range is infinite.
+     *
+     * @return bool
+     */
+    public function isInfinite()
+    {
+        return static::infinite() == $this;
+    }
 }

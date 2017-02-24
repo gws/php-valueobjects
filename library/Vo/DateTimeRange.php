@@ -64,14 +64,14 @@ class DateTimeRange extends DateRange
 
         if ($this->getStart() < $arg->getStart()) {
             return new static(
-                clone $this->getStart(),
-                date_modify(clone $arg->getStart(), '-1 second')
+                $this->getStart(),
+                $arg->getStart()->modify('-1 second')
             );
         }
 
         return new static(
-            date_modify(clone $arg->getEnd(), '+1 second'),
-            clone $this->getEnd()
+            $arg->getEnd()->modify('+1 second'),
+            $this->getEnd()
         );
     }
 

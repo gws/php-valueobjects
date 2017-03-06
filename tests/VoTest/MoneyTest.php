@@ -3,9 +3,10 @@
 namespace VoTest;
 
 use NumberFormatter;
+use PHPUnit\Framework\TestCase;
 use Vo\Money;
 
-class MoneyTest extends \PHPUnit_Framework_TestCase
+class MoneyTest extends TestCase
 {
     public function testAddTwoSmallNumbers()
     {

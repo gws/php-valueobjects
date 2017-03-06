@@ -4,9 +4,12 @@ namespace VoTest;
 
 use DateTime;
 use DateTimeImmutable;
+use InvalidArgumentException;
+use OutOfRangeException;
+use PHPUnit\Framework\TestCase;
 use Vo\DateRange;
 
-class DateRangeTest extends \PHPUnit_Framework_TestCase
+class DateRangeTest extends TestCase
 {
     public function testFromIso8601()
     {
@@ -22,7 +25,7 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
             $dr->getEnd()
         );
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
 
         $dr = DateRange::fromIso8601('2009-06-07');
     }
@@ -306,7 +309,7 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
             $dr2->diff($dr1)
         );
 
-        $this->setExpectedException('OutOfRangeException');
+        $this->expectException(OutOfRangeException::class);
 
         $dr1->diff($dr3);
     }

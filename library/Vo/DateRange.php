@@ -10,7 +10,8 @@
 
 namespace Vo;
 
-use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use InvalidArgumentException;
 use OutOfRangeException;
 
@@ -36,35 +37,37 @@ class DateRange
     const PAST = '1000-01-01';
 
     /**
-     * Internal 'start' DateTime
+     * Range start date
      *
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $start;
 
     /**
-     * Internal 'end' DateTime
+     * Range end date
      *
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $end;
 
     /**
      * Create a DateRange from a start date and an end date
      *
-     * @param DateTime $start Start date
-     * @param DateTime $end   End date
+     * @param DateTimeInterface $start Start date
+     * @param DateTimeInterface $end   End date
      */
-    public function __construct(DateTime $start, DateTime $end)
+    public function __construct(DateTimeInterface $start, DateTimeInterface $end)
     {
-        $this->start = $start;
-        $this->end = $end;
+        $this->start = self::ensureDateTimeImmutable($start);
+        $this->end = self::ensureDateTimeImmutable($end);
     }
 
     /**
      * Build a DateRange object from an ISO-8601 interval string
      *
-     * Currently, this only accepts dates of the form Y-m-d/Y-m-d.
+     * Currently, this only accepts a start date and end date. Durations are not
+     * supported. In addition, if any elements are missing from the end value,
+     * these are not assumed to be the same as for the start value.
      *
      * @param  string    $string ISO-8601 interval string
      * @return DateRange
@@ -75,13 +78,14 @@ class DateRange
 
         if (count($split) < 2) {
             throw new InvalidArgumentException(
-                'The format is expected to be Y-m-d/Y-m-d.'
+                'The format is expected to be two ISO-8601 dates separated by'
+                . ' a \'/\'.'
             );
         }
 
         return new static(
-            new DateTime($split[0]),
-            new DateTime($split[1])
+            new DateTimeImmutable($split[0]),
+            new DateTimeImmutable($split[1])
         );
     }
 
@@ -94,80 +98,63 @@ class DateRange
      *
      * <pre>
      * // Example usage
-     * $array = array('start' => '2009-05-06', 'end' => new DateTime('2009-06-07'));
+     * $array = array(
+     *     'start' => '2009-05-06',
+     *     'end' => new DateTimeImmutable('2009-06-07')
+     * );
      *
      * $object = new stdClass();
      * $object->start = '2009-05-06';
-     * $object->end = new DateTime('2009-06-07');
+     * $object->end = new DateTimeImmutable('2009-06-07');
      *
      * $range1 = DateRange::fromData($array);
      * $range2 = DateRange::fromData($object);
      * </pre>
      *
-     * @param  array|object $object
-     * @param  string       $start  'Start' member or index name
-     * @param  string       $end    'End' member or index name
+     * @param  array|object $data
+     * @param  string       $startIdx 'Start' member or index name
+     * @param  string       $endIdx   'End' member or index name
      * @return DateRange
      */
-    public static function fromData($object, $start = 'start', $end = 'end')
+    public static function fromData($data, $startIdx = 'start', $endIdx = 'end')
     {
-        if (is_object($object)) {
-            $is_object = true;
-        } elseif (is_array($object)) {
-            $is_object = false;
-        } else {
+        if (is_object($data)) {
+            $data = get_object_vars($data);
+        } elseif (!is_array($data)) {
             throw new InvalidArgumentException(
                 'You must pass either an array or an object as the first parameter.'
             );
         }
 
-        $start_dt = null;
-        $end_dt = null;
-        if ($is_object) {
-            if (isset($object->{$start})) {
-                if ($object->{$start} instanceof DateTime) {
-                    $start_dt = clone $object->{$start};
-                } else {
-                    $start_dt = new DateTime($object->{$start});
-                }
-            }
+        $start = $end = null;
 
-            if (isset($object->{$end})) {
-                if ($object->{$end} instanceof DateTime) {
-                    $end_dt = clone $object->{$end};
-                } else {
-                    $end_dt = new DateTime($object->{$end});
-                }
-            }
-        } else {
-            if (isset($object[$start])) {
-                if ($object[$start] instanceof DateTime) {
-                    $start_dt = clone $object[$start];
-                } else {
-                    $start_dt = new DateTime($object[$start]);
-                }
-            }
-
-            if (isset($object[$end])) {
-                if ($object[$end] instanceof DateTime) {
-                    $end_dt = clone $object[$end];
-                } else {
-                    $end_dt = new DateTime($object[$end]);
-                }
+        if (isset($data[$startIdx])) {
+            if ($data[$startIdx] instanceof DateTimeInterface) {
+                $start = self::ensureDateTimeImmutable($data[$startIdx]);
+            } else {
+                $start = new DateTimeImmutable($data[$startIdx]);
             }
         }
 
-        if (is_null($start_dt) && is_null($end_dt)) {
-            $date_range = static::infinite();
-        } elseif (is_null($start_dt)) {
-            $date_range = static::upTo($end_dt);
-        } elseif (is_null($end_dt)) {
-            $date_range = static::startingOn($start_dt);
-        } else {
-            $date_range = new static($start_dt, $end_dt);
+        if (isset($data[$endIdx])) {
+            if ($data[$endIdx] instanceof DateTimeInterface) {
+                $end = self::ensureDateTimeImmutable($data[$endIdx]);
+            } else {
+                $end = new DateTimeImmutable($data[$endIdx]);
+            }
         }
 
-        return $date_range;
+        if (is_null($start) && is_null($end)) {
+            $range = static::infinite();
+        } elseif (is_null($start)) {
+            $range = static::upTo($end);
+        } elseif (is_null($end)) {
+            $range = static::startingOn($start);
+        } else {
+            $range = new static($start, $end);
+        }
+
+        return $range;
     }
 
     /**
@@ -179,35 +166,44 @@ class DateRange
      */
     public static function infinite()
     {
-        return new static(new DateTime(static::PAST), new DateTime(static::FUTURE));
+        return new static(
+            new DateTimeImmutable(static::PAST),
+            new DateTimeImmutable(static::FUTURE)
+        );
     }
 
     /**
      * Create a date range with an unbounded past, but a bounded future
      *
-     * @param  DateTime  $end Upper bound
+     * @param  DateTimeInterface $end Upper bound
      * @return DateRange
      */
-    public static function upTo(DateTime $end)
+    public static function upTo(DateTimeInterface $end)
     {
-        return new static(new DateTime(static::PAST), $end);
+        return new static(
+            new DateTimeImmutable(static::PAST),
+            $end
+        );
     }
 
     /**
      * Create a date range with an bounded past, but an unbounded future
      *
-     * @param  DateTime  $start Lower bound
+     * @param  DateTimeInterface $start Lower bound
      * @return DateRange
      */
-    public static function startingOn(DateTime $start)
+    public static function startingOn(DateTimeInterface $start)
     {
-        return new static($start, new DateTime(static::FUTURE));
+        return new static(
+            $start,
+            new DateTimeImmutable(static::FUTURE)
+        );
     }
 
     /**
      * Accessor that returns the start date of this range
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
     public function getStart()
     {
@@ -217,7 +213,7 @@ class DateRange
     /**
      * Accessor that returns the end date of this range
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
     public function getEnd()
     {
@@ -251,22 +247,21 @@ class DateRange
     }
 
     /**
-     * Test whether this DateRange includes a DateTime or a DateRange
+     * Test whether this DateRange includes a DateTimeInterface or a DateRange
      *
-     * If a DateTime is greater than or equal to the start of AND less than
-     * or equal to the end of this DateRange, it is considered included.
+     * If a DateTimeInterface is greater than or equal to the start of AND less
+     * than or equal to the end of this DateRange, it is considered included.
      *
-     * If a DateRange is fully enclosed inside this DateRange, it is
-     * considered included. The test is essentially the same as for the
-     * DateTime except it is performed on both the start and end dates of the
-     * DateRange.
+     * If a DateRange is fully enclosed inside this DateRange, it is considered
+     * included. The test is essentially the same as for the DateTimeInterface
+     * except it is performed on both the start and end dates of the DateRange.
      *
-     * @param  DateTime|DateRange $arg Other object to test
+     * @param  DateTimeInterface|DateRange $arg Other object to test
      * @return bool
      */
     public function includes($arg)
     {
-        if ($arg instanceof DateTime) {
+        if ($arg instanceof DateTimeInterface) {
             return $this->getStart() <= $arg
                 && $this->getEnd() >= $arg;
         } elseif ($arg instanceof DateRange) {
@@ -274,7 +269,8 @@ class DateRange
                 && $this->includes($arg->getEnd());
         } else {
             throw new InvalidArgumentException(
-                'Argument must be an instance of DateTime or ' . __CLASS__
+                'Argument must be an instance of DateTimeInterface or'
+                . ' ' . __CLASS__
             );
         }
     }
@@ -364,14 +360,14 @@ class DateRange
 
         if ($this->getStart() < $arg->getStart()) {
             return new static(
-                clone $this->getStart(),
-                date_modify(clone $arg->getStart(), '-1 day')
+                $this->getStart(),
+                $arg->getStart()->modify('-1 day')
             );
         }
 
         return new static(
-            date_modify(clone $arg->getEnd(), '+1 day'),
-            clone $this->getEnd()
+            $arg->getEnd()->modify('+1 day'),
+            $this->getEnd()
         );
     }
 
@@ -404,8 +400,8 @@ class DateRange
     /**
      * Return the start of a series of DateRanges
      *
-     * @param  array    $args Other DateRanges to test
-     * @return DateTime
+     * @param  array    $args    Other DateRanges to test
+     * @return DateTimeImmutable
      */
     public static function getSeriesStart(array $args)
     {
@@ -420,8 +416,8 @@ class DateRange
     /**
      * Return the end of a series of DateRanges
      *
-     * @param  array    $args Other DateRanges to test
-     * @return DateTime
+     * @param  array    $args    Other DateRanges to test
+     * @return DateTimeImmutable
      */
     public static function getSeriesEnd(array $args)
     {
@@ -484,7 +480,7 @@ class DateRange
      */
     public function isFuture()
     {
-        return new DateTime(static::FUTURE) == $this->getEnd();
+        return new DateTimeImmutable(static::FUTURE) == $this->getEnd();
     }
 
     /**
@@ -494,7 +490,7 @@ class DateRange
      */
     public function isPast()
     {
-        return new DateTime(static::PAST) == $this->getStart();
+        return new DateTimeImmutable(static::PAST) == $this->getStart();
     }
 
     /**
@@ -505,5 +501,22 @@ class DateRange
     public function isInfinite()
     {
         return static::infinite() == $this;
+    }
+
+    /**
+     * Ensure a DateTimeInterface is an instance of DateTimeImmutable
+     *
+     * The object will be converted, if necessary.
+     *
+     * @param  DateTimeInterface $d Date to convert
+     * @return DateTimeImmutable
+     */
+    private static function ensureDateTimeImmutable(DateTimeInterface $d)
+    {
+        if ($d instanceof DateTimeImmutable) {
+            return $d;
+        }
+
+        return DateTimeImmutable::createFromMutable($d);
     }
 }

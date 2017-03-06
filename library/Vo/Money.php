@@ -324,8 +324,7 @@ class Money
         if (is_numeric($money)) {
             $money = new Money(
                 $money,
-                $this->getCurrency(),
-                $this->getScale()
+                $this->getCurrency()
             );
         } else {
             if (!$money instanceof Money) {
@@ -361,8 +360,7 @@ class Money
                 $other->getAmount(),
                 $this->getScale()
             ),
-            $this->getCurrency(),
-            $this->getScale()
+            $this->getCurrency()
         );
     }
 }

@@ -3,9 +3,13 @@
 namespace VoTest;
 
 use DateTime;
+use DateTimeImmutable;
+use InvalidArgumentException;
+use OutOfRangeException;
+use PHPUnit\Framework\TestCase;
 use Vo\DateRange;
 
-class DateRangeTest extends \PHPUnit_Framework_TestCase
+class DateRangeTest extends TestCase
 {
     public function testFromIso8601()
     {
@@ -17,11 +21,11 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            new DateTime('2011-05-04'),
+            new DateTimeImmutable('2011-05-04'),
             $dr->getEnd()
         );
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
 
         $dr = DateRange::fromIso8601('2009-06-07');
     }
@@ -49,7 +53,7 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
             );
 
             $this->assertEquals(
-                new DateTime('2011-06-07'),
+                new DateTimeImmutable('2011-06-07'),
                 $dr->getEnd()
             );
         }
@@ -66,7 +70,7 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            new DateTime(DateRange::FUTURE),
+            new DateTimeImmutable(DateRange::FUTURE),
             $dr3->getEnd()
         );
 
@@ -82,7 +86,7 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            new DateTime('2011-06-08'),
+            new DateTimeImmutable('2011-06-08'),
             $dr4->getEnd()
         );
     }
@@ -91,11 +95,11 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
     {
         $eq1 = new DateRange(
             new DateTime('2010-01-02'),
-            new DateTime('2010-01-03')
+            new DateTimeImmutable('2010-01-03')
         );
 
         $eq2 = new DateRange(
-            new DateTime('2010-01-02'),
+            new DateTimeImmutable('2010-01-02'),
             new DateTime('2010-01-03')
         );
 
@@ -103,8 +107,8 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($eq2->equals($eq1));
 
         $ne1 = new DateRange(
-            new DateTime('2010-02-01'),
-            new DateTime('2010-01-03')
+            new DateTimeImmutable('2010-02-01'),
+            new DateTimeImmutable('2010-01-03')
         );
 
         $ne2 = new DateRange(
@@ -124,13 +128,44 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertTrue($dr->includes(new DateTime('2006-07-08')));
-        $this->assertTrue($dr->includes(new DateTime('2006-08-01')));
+        $this->assertTrue($dr->includes(new DateTimeImmutable('2006-08-01')));
         $this->assertFalse($dr->includes(new DateTime('2006-07-07')));
 
-        $this->assertTrue($dr->includes(new DateRange(new DateTime('2006-07-08'), new DateTime('2006-07-10'))));
-        $this->assertTrue($dr->includes(new DateRange(new DateTime('2006-07-09'), new DateTime('2006-09-05'))));
-        $this->assertFalse($dr->includes(new DateRange(new DateTime('2006-07-07'), new DateTime('2006-07-08'))));
-        $this->assertFalse($dr->includes(new DateRange(new DateTime('2006-07-09'), new DateTime('2006-09-06'))));
+        $this->assertTrue(
+            $dr->includes(
+                new DateRange(
+                    new DateTime('2006-07-08'),
+                    new DateTime('2006-07-10')
+                )
+            )
+        );
+
+        $this->assertTrue(
+            $dr->includes(
+                new DateRange(
+                    new DateTimeImmutable('2006-07-09'),
+                    new DateTime('2006-09-05')
+                )
+            )
+        );
+
+        $this->assertFalse(
+            $dr->includes(
+                new DateRange(
+                    new DateTime('2006-07-07'),
+                    new DateTimeImmutable('2006-07-08')
+                )
+            )
+        );
+
+        $this->assertFalse(
+            $dr->includes(
+                new DateRange(
+                    new DateTimeImmutable('2006-07-09'),
+                    new DateTimeImmutable('2006-09-06')
+                )
+            )
+        );
     }
 
     public function testOverlaps()
@@ -140,11 +175,50 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
             new DateTime('2006-09-05')
         );
 
-        $this->assertTrue($dr->overlaps(new DateRange(new DateTime('2006-07-08'), new DateTime('2006-07-10'))));
-        $this->assertTrue($dr->overlaps(new DateRange(new DateTime('2006-07-09'), new DateTime('2006-09-05'))));
-        $this->assertTrue($dr->overlaps(new DateRange(new DateTime('2006-07-07'), new DateTime('2006-07-08'))));
-        $this->assertTrue($dr->overlaps(new DateRange(new DateTime('2006-07-09'), new DateTime('2006-09-06'))));
-        $this->assertFalse($dr->overlaps(new DateRange(new DateTime('2006-07-06'), new DateTime('2006-07-07'))));
+        $this->assertTrue(
+            $dr->overlaps(
+                new DateRange(
+                    new DateTime('2006-07-08'),
+                    new DateTime('2006-07-10')
+                )
+            )
+        );
+
+        $this->assertTrue(
+            $dr->overlaps(
+                new DateRange(
+                    new DateTime('2006-07-09'),
+                    new DateTimeImmutable('2006-09-05')
+                )
+            )
+        );
+
+        $this->assertTrue(
+            $dr->overlaps(
+                new DateRange(
+                    new DateTimeImmutable('2006-07-07'),
+                    new DateTime('2006-07-08')
+                )
+            )
+        );
+
+        $this->assertTrue(
+            $dr->overlaps(
+                new DateRange(
+                    new DateTimeImmutable('2006-07-09'),
+                    new DateTimeImmutable('2006-09-06')
+                )
+            )
+        );
+
+        $this->assertFalse(
+            $dr->overlaps(
+                new DateRange(
+                    new DateTimeImmutable('2006-07-06'),
+                    new DateTimeImmutable('2006-07-07')
+                )
+            )
+        );
     }
 
     public function testGap()
@@ -235,7 +309,7 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
             $dr2->diff($dr1)
         );
 
-        $this->setExpectedException('OutOfRangeException');
+        $this->expectException(OutOfRangeException::class);
 
         $dr1->diff($dr3);
     }

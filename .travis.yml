@@ -1,15 +1,14 @@
 language: php
 
 php:
-  - "5.4"
-  - "5.5"
-  - "5.6"
   - "7.0"
+  - "7.1"
 
 before_script:
   - composer install --dev
 
 script:
+  - ./vendor/bin/phpstan analyze --level 3 library
   - ./vendor/bin/phpunit -c ./tests/phpunit.xml.dist
   - ./vendor/bin/phpcs --standard=PSR2 library
   - ./vendor/bin/phpcs --standard=PSR2 tests/VoTest
